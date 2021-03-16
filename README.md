@@ -1,6 +1,6 @@
 # Linkedón
 
-_Acá va un párrafo que describa lo que es el proyecto_
+Linkedón es un proyecto con el objetivo de buscar, listar, guardar, modificar, eliminar ofertas de trabajo de empresas recibidas.
 
 ## Comenzando 🚀
 
@@ -8,44 +8,60 @@ _Estas instrucciones te permitirán obtener una copia del proyecto en funcionami
 
 Mira **Deployment** para conocer como desplegar el proyecto.
 
-
 ### Pre-requisitos 📋
 
-PHP
+XAMPP con PHP8
 
 ```
-Da un ejemplo
+https://www.apachefriends.org/es/index.html
 ```
+
+Symfony
+
+```
+https://symfony.com/download
+```
+
 Composer
 
 ```
-VUE CLI
+https://getcomposer.org/download/
 ```
-PHP
+
+NODE JS
 
 ```
-Da un ejemplo
+https://nodejs.org/es/download/
 ```
-PHP
+
+Vue CLI
 
 ```
-Da un ejemplo
+npm install -g @vue/cli
 ```
 
 ### Instalación 🔧
 
 _Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
 
-_Dí cómo será ese paso_
+Para tener las dependencias del proyecto de Symfony:
 
 ```
-Da un ejemplo
+cd /Symfony
 ```
 
-_Y repite_
+```
+composer install
+```
+
+Para tener las dependencias locales del proyecto de Vue:
 
 ```
-hasta finalizar
+cd /vue-linkedon
+```
+
+```
+npm install
 ```
 
 _Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
@@ -76,19 +92,13 @@ _Agrega notas adicionales sobre como hacer deploy_
 
 ## Construido con 🛠️
 
-_Menciona las herramientas que utilizaste para crear tu proyecto_
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-* [Maven](https://maven.apache.org/) - Manejador de dependencias
-* [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
+-   [Vue]() - El framework web usado
+-   [Symfony]() - Manejador de dependencias
+-   [Composer]() - Usado para generar RSS
 
 ## Contribuyendo 🖇️
 
 Por favor lee el [CONTRIBUTING.md](https://gist.github.com/villanuevand/xxxxxx) para detalles de nuestro código de conducta, y el proceso para enviarnos pull requests.
-
-## Wiki 📖
-
-Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
 
 ## Versionado 📌
 
@@ -98,10 +108,9 @@ Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones
 
 _Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
 
-* **Andrés Villanueva** - *Trabajo Inicial* - [villanuevand](https://github.com/villanuevand)
-* **Fulanito Detal** - *Documentación* - [fulanitodetal](#fulanito-de-tal)
-
-También puedes mirar la lista de todos los [contribuyentes](https://github.com/your/project/contributors) quíenes han participado en este proyecto. 
+-   **Pablo Gómez** - _Symfony, Base de Datos_ - [GitHub](https://github.com/)
+-   **Angel Miguel García** - _Diseño_ - [GitHub](https://github.com/)
+-   **Jordi Callupe** - _Vue_ - [GitHub](https://github.com/)
 
 ## Licencia 📄
 
@@ -109,7 +118,7 @@ Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md
 
 ## Expresiones de Gratitud 🎁
 
-* Comenta a otros sobre este proyecto 📢
-* Invita una cerveza 🍺 o un café ☕ a alguien del equipo. 
-* Da las gracias públicamente 🤓.
-* etc.
+-   Comenta a otros sobre este proyecto 📢
+-   Invita una cerveza 🍺 o un café ☕ a alguien del equipo.
+-   Da las gracias públicamente 🤓.
+-   etc.
