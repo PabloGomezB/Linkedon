@@ -11,7 +11,22 @@ Mira **Deployment** para conocer como desplegar el proyecto.
 
 ### Pre-requisitos 📋
 
-_Que cosas necesitas para instalar el software y como instalarlas_
+PHP
+
+```
+Da un ejemplo
+```
+Composer
+
+```
+VUE CLI
+```
+PHP
+
+```
+Da un ejemplo
+```
+PHP
 
 ```
 Da un ejemplo
