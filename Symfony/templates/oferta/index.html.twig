@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Oferta index{% endblock %}
+
+{% block body %}
+    <h1>Oferta index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titol</th>
+                <th>Descripcio</th>
+                <th>DataPublicacio</th>
+                <th>Ubicacio</th>
+                <th>Estat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ofertum in ofertas %}
+            <tr>
+                <td>{{ ofertum.id }}</td>
+                <td>{{ ofertum.titol }}</td>
+                <td>{{ ofertum.descripcio }}</td>
+                <td>{{ ofertum.dataPublicacio ? ofertum.dataPublicacio|date('Y-m-d') : '' }}</td>
+                <td>{{ ofertum.ubicacio }}</td>
+                <td>{{ ofertum.estat }}</td>
+                <td>
+                    <a href="{{ path('oferta_show', {'id': ofertum.id}) }}">show</a>
+                    <a href="{{ path('oferta_edit', {'id': ofertum.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('oferta_new') }}">Create new</a>
+{% endblock %}
