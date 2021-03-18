@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Categoria;
 use App\Entity\Oferta;
 use App\Form\OfertaType;
 use App\Repository\OfertaRepository;
@@ -24,6 +25,8 @@ class OfertaController extends AbstractController
     #[Route('/new', name: 'oferta_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response{
         $ofertum = new Oferta();
+        $ofertum->setDataPublicacio(new \DateTime());
+        $ofertum->setEstat(0);
         $form = $this->createForm(OfertaType::class, $ofertum);
         $form->handleRequest($request);
 

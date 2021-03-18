@@ -20,7 +20,7 @@ class OfertaType extends AbstractType
             // ->add('estat', null, array('attr' => array('class' => 'form-control', 'placeholder' => '1')))
             ->add('empresa', null, array('attr' => array('class' => 'form-control')))
             // ->add('candidats', null, array('attr' => array('class' => 'form-control')))
-            // ->add('categoria', null, array('attr' => array('class' => 'form-control')))
+            ->add('categoria', null, array('attr' => array('class' => 'form-control')))
         ;
     }
 
