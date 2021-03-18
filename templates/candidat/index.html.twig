@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Candidat index{% endblock %}
+
+{% block body %}
+    <h1>Candidat index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Cognom1</th>
+                <th>Cognom2</th>
+                <th>Telefon</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for candidat in candidats %}
+            <tr>
+                <td>{{ candidat.id }}</td>
+                <td>{{ candidat.nom }}</td>
+                <td>{{ candidat.cognom1 }}</td>
+                <td>{{ candidat.cognom2 }}</td>
+                <td>{{ candidat.telefon }}</td>
+                <td>
+                    <a href="{{ path('candidat_show', {'id': candidat.id}) }}">show</a>
+                    <a href="{{ path('candidat_edit', {'id': candidat.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('candidat_new') }}">Create new</a>
+{% endblock %}
