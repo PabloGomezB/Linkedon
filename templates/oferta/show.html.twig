@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Oferta{% endblock %}
+
+{% block body %}
+    <h1>Oferta</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ofertum.id }}</td>
+            </tr>
+            <tr>
+                <th>Titol</th>
+                <td>{{ ofertum.titol }}</td>
+            </tr>
+            <tr>
+                <th>Descripcio</th>
+                <td>{{ ofertum.descripcio }}</td>
+            </tr>
+            <tr>
+                <th>DataPublicacio</th>
+                <td>{{ ofertum.dataPublicacio ? ofertum.dataPublicacio|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Ubicacio</th>
+                <td>{{ ofertum.ubicacio }}</td>
+            </tr>
+            <tr>
+                <th>Estat</th>
+                <td>{{ ofertum.estat }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('oferta_index') }}">back to list</a>
+
+    <a href="{{ path('oferta_edit', {'id': ofertum.id}) }}">edit</a>
+
+    {{ include('oferta/_delete_form.html.twig') }}
+{% endblock %}
