@@ -12,14 +12,15 @@ class OfertaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titol')
-            ->add('descripcio')
-            ->add('dataPublicacio')
-            ->add('ubicacio')
-            ->add('estat')
-            ->add('empresa')
-            ->add('candidats')
-            ->add('categoria')
+            ->add('titol', null, array('attr' => array('class' => 'form-control', 'placeholder' => 'Programador web')))
+            ->add('descripcio', null, array('attr' => array('class' => 'form-control', 'placeholder' => 'Se necesita programador web con 10 años de experiencia en Kolvin corp.')))
+            // ->add('dataPublicacio', null, array('attr' => array('class' => 'form-control', 'type' => 'date'))
+            // ->add('dataPublicacio', null, array('data' => new \DateTime()))
+            ->add('ubicacio', null, array('attr' => array('class' => 'form-control', 'placeholder' => 'Barcelona')))
+            // ->add('estat', null, array('attr' => array('class' => 'form-control', 'placeholder' => '1')))
+            ->add('empresa', null, array('attr' => array('class' => 'form-control')))
+            // ->add('candidats', null, array('attr' => array('class' => 'form-control')))
+            // ->add('categoria', null, array('attr' => array('class' => 'form-control')))
         ;
     }
 

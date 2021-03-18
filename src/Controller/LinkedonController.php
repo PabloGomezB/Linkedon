@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class LinkedonController extends AbstractController {
-    #[Route('/', name: 'linkedon')]
+    #[Route('/', name: 'linkedon_index')]
     public function index(): Response {
         return $this->render('index.html.twig', [
             'controller_name' => 'LinkedonController',

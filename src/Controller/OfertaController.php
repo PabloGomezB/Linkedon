@@ -22,8 +22,7 @@ class OfertaController extends AbstractController
     }
 
     #[Route('/new', name: 'oferta_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
-    {
+    public function new(Request $request): Response{
         $ofertum = new Oferta();
         $form = $this->createForm(OfertaType::class, $ofertum);
         $form->handleRequest($request);
@@ -33,7 +32,7 @@ class OfertaController extends AbstractController
             $entityManager->persist($ofertum);
             $entityManager->flush();
 
-            return $this->redirectToRoute('oferta_index');
+            return $this->redirectToRoute('linkedon_index');
         }
 
         return $this->render('oferta/new.html.twig', [
