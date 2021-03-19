@@ -32,10 +32,10 @@ export default {
         getOfertas() {
             this.axios
                 .get(
-                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta"
+                    "https://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta"
                 )
                 .then((response) => {
-                    console.log(response);
+                    console.log("lista ofertas", response);
                     this.resultadoOfertas = response.data.records;
                 });
         },
