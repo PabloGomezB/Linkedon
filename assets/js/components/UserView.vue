@@ -1,20 +1,20 @@
 <template>
     <div>
-        <ListaOfertas></ListaOfertas>
+        <!-- <ListaOfertas></ListaOfertas> -->
         <OfertasByCategorias></OfertasByCategorias>
         <!-- <ChartOfertas></ChartOfertas> -->
     </div>
 </template>
 
 <script>
-import ListaOfertas from "./ListaOfertas";
+// import ListaOfertas from "./ListaOfertas";
 import OfertasByCategorias from "./OfertasByCategorias";
 // import ChartOfertas from "./ChartOfertas";
 
 export default {
     name: "UserView",
     components: {
-        ListaOfertas,
+        // ListaOfertas,
         OfertasByCategorias,
         // ChartOfertas,
     },

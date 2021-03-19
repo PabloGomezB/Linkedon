@@ -14,13 +14,7 @@ export default {
     data() {
         return {
             selected: null,
-            options: [
-                { value: null, text: "Selecciona una categoría" },
-                { value: "1", text: "DAW" },
-                { value: "2", text: "DAM" },
-                { value: "3", text: "SMX" },
-                { value: "4", text: "ASIX" },
-            ],
+            options: [{ value: null, text: "Selecciona una categoría" }],
         };
     },
     methods: {
@@ -30,7 +24,7 @@ export default {
             } else {
                 this.axios
                     .get(
-                        "https://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?filter=categoria_id,eq," +
+                        "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?filter=categoria_id,eq," +
                             this.selected
                     )
                     .then((response) => {
@@ -46,7 +40,7 @@ export default {
         getOfertas() {
             this.axios
                 .get(
-                    "https://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta"
+                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta"
                 )
                 .then((response) => {
                     console.log("ofertas por categorias", response);
@@ -56,6 +50,19 @@ export default {
     },
     mounted() {
         this.getOfertas();
+        this.axios
+            .get(
+                "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/categoria"
+            )
+            .then((response) => {
+                console.log("categorias", response.data.records);
+                response.data.records.forEach((categoriaElement) => {
+                    this.options.push({
+                        value: categoriaElement.id,
+                        text: categoriaElement.descripcio,
+                    });
+                });
+            });
     },
 };
 </script>

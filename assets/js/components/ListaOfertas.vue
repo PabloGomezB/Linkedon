@@ -32,7 +32,7 @@ export default {
         getOfertas() {
             this.axios
                 .get(
-                    "https://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta"
+                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta"
                 )
                 .then((response) => {
                     console.log("lista ofertas", response);
