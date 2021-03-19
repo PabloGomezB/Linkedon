@@ -25,7 +25,9 @@ export default {
                 this.axios
                     .get(
                         "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?filter=categoria_id,eq," +
-                            this.selected
+                            this.selected +
+                            "&filter=data_publicacio,gt," +
+                            this.getDate3MonthsSubstracted()
                     )
                     .then((response) => {
                         console.log(
@@ -40,29 +42,41 @@ export default {
         getOfertas() {
             this.axios
                 .get(
-                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta"
+                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?filter=data_publicacio,gt," +
+                        this.getDate3MonthsSubstracted()
                 )
                 .then((response) => {
                     console.log("ofertas por categorias", response);
                     this.$parent.resultadoOfertas = response.data.records;
                 });
         },
+        getCategorias() {
+            this.axios
+                .get(
+                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/categoria"
+                )
+                .then((response) => {
+                    console.log("categorias", response.data.records);
+                    response.data.records.forEach((categoriaElement) => {
+                        this.options.push({
+                            value: categoriaElement.id,
+                            text: categoriaElement.descripcio,
+                        });
+                    });
+                });
+        },
+        getDate3MonthsSubstracted() {
+            let date = new Date();
+            date.setMonth(date.getMonth() - 3);
+            let month = date.getMonth() + 1;
+            let day = date.getDate();
+            let year = date.getFullYear();
+            return year + "/" + month + "/" + day;
+        },
     },
     mounted() {
         this.getOfertas();
-        this.axios
-            .get(
-                "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/categoria"
-            )
-            .then((response) => {
-                console.log("categorias", response.data.records);
-                response.data.records.forEach((categoriaElement) => {
-                    this.options.push({
-                        value: categoriaElement.id,
-                        text: categoriaElement.descripcio,
-                    });
-                });
-            });
+        this.getCategorias();
     },
 };
 </script>

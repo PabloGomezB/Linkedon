@@ -41,6 +41,18 @@ export default {
                     this.boxTwo = value;
                     if (true == value) {
                         this.$bvModal.hide("modal-oferta");
+                        this.axios({
+                            method: "post",
+                            url:
+                                "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta_candidat",
+                            headers: {},
+                            data: {
+                                oferta_id: this.ofertaSeleccionada.id,
+                                candidat_id: 1,
+                            },
+                        }).then(function(response) {
+                            console.log("oferta_candidad", response);
+                        });
                     }
                 })
                 .catch((err) => {
