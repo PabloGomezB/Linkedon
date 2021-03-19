@@ -6,14 +6,16 @@
                 v-for="oferta in resultadoOfertas"
                 :key="oferta.id"
             >
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{ oferta.titol }}</h5>
-                    <small>{{ oferta.data_publicacio }}</small>
-                </div>
-                <p class="mb-1">
-                    {{ oferta.descripcio }}
-                </p>
-                <small>{{ oferta.ubicacio }}</small>
+                <!-- <div v-if="oferta.estat == 1"> -->
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ oferta.titol }}</h5>
+                        <small>{{ oferta.data_publicacio }}</small>
+                    </div>
+                    <p class="mb-1">
+                        {{ oferta.descripcio }}
+                    </p>
+                    <small>{{ oferta.ubicacio }}</small>
+                <!-- </div> -->
             </b-list-group-item>
         </b-list-group>
     </div>
@@ -34,7 +36,7 @@ export default {
                     "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta"
                 )
                 .then((response) => {
-                    console.log(response);
+                    console.log(response.data);
                     this.resultadoOfertas = response.data.records;
                 });
         },
