@@ -14,9 +14,9 @@ class EmpresaType extends AbstractType
         $builder
             ->add('nom')
             ->add('tipus')
-            ->add('logo')
+            // ->add('logo')
             ->add('correu')
-            ->add('usuari')
+            // ->add('usuari')
         ;
     }
 

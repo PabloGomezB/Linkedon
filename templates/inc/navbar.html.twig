@@ -7,12 +7,24 @@
 
 		<div class="collapse navbar-collapse" id="mobile-nav">
 			<ul class="navbar-nav ml-auto">
+
+				{% if is_granted("ROLE_EMPRESA") %}
 				<li class="nav-item mr-5">
-					<a href="/" class="nav-link" style="color:white;">Home</a>
-				</li>
-				<li class="nav-item">
 					<a href="/oferta/new" class="nav-link" style="color:white;">Empresa</a>
 				</li>
+				{% endif %}
+				{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+				<li class="nav-item">
+					<a href="/logout" class="nav-link" style="color:white;">Logout</a>
+				</li>
+				{% else %}
+				<li class="nav-item">
+					<a href="/login" class="nav-link" style="color:white;">Login</a>
+				</li>
+				<li class="nav-item">
+					<a href="/register" class="nav-link" style="color:white;">Register</a>
+				</li>
+				{% endif %}
 			</ul>
 		</div>
 	</div>
