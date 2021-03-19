@@ -48,14 +48,6 @@ composer install
 npm install
 ```
 
-Para ver el proyecto en en local:
-
-```
-symfony server:start -d
-```
-
-Y la consola te dirá la dirección web local.
-
 Encore necesita verificar los cambios de Vue:
 
 ```
@@ -67,6 +59,14 @@ Y para no estar ejecutando el comando todo el rato utilizamos el watch:
 ```
 npm run watch
 ```
+
+Para ver el proyecto en en local:
+
+```
+symfony server:start -d
+```
+
+Y la consola te dirá la dirección web local.
 
 ## Ejecutando las pruebas ⚙️
 
@@ -90,9 +90,9 @@ Da un ejemplo
 
 ## Despliegue 📦
 
-    ```
+```
 
-    ```
+```
 
 ## Construido con 🛠️
 
