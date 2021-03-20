@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!-- <ListaOfertas></ListaOfertas> -->
         <OfertasByCategorias></OfertasByCategorias>
         <!-- <ChartOfertas></ChartOfertas> -->
     </div>
@@ -12,9 +11,8 @@ import OfertasByCategorias from "./OfertasByCategorias";
 // import ChartOfertas from "./ChartOfertas";
 
 export default {
-    name: "UserView",
+    name: "UserLoggedView",
     components: {
-        // ListaOfertas,
         OfertasByCategorias,
         // ChartOfertas,
     },

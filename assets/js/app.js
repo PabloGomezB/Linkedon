@@ -18,7 +18,9 @@ import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
 
-import App from "./App.vue";
+import App from "./views/App.vue";
+
+import Routes from "./routes.js";
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import "bootstrap/dist/css/bootstrap.css";
@@ -33,5 +35,6 @@ Vue.use(VueAxios, axios);
 
 new Vue({
     el: "#app",
+    router: Routes,
     render: (h) => h(App),
 });

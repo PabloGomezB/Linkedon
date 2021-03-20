@@ -31,7 +31,6 @@ security:
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
-
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
     role_hierarchy:
@@ -40,4 +39,5 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/oferta, roles: [ROLE_ADMIN, ROLE_EMPRESA] }
+        - { path: ^/, role: [IS_AUTHENTICATED_ANONYMOUSLY] }
         # - { path: ^/profile, roles: ROLE_USER }
