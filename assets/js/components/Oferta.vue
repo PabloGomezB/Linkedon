@@ -55,14 +55,12 @@ export default {
                     "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta_candidat?join=candidat_id,candidat"
                 )
                 .then((response) => {
-                    console.log("oferta_candidat", this.userLogged.id);
                     response.data.records.forEach((element) => {
                         if (
                             element.candidat_id.usuari_id ===
                                 this.userLogged.id &&
                             element.oferta_id === this.oferta.id
                         ) {
-                            console.log("candidat y oferta match");
                             this.colorJoinBody = "primary";
                             this.colorJoinText = "white";
                         }
