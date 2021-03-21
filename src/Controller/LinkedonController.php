@@ -28,16 +28,13 @@ class LinkedonController extends AbstractController {
             return $this->redirectToRoute('app_login');
         }
 
-        if(in_array("ROLE_UNVERIFIED", $this->getUser()->getRoles())){
+        if (in_array("ROLE_UNVERIFIED", $this->getUser()->getRoles())) {
             return $this->redirectToRoute('empresa_new'); // En este controlador se registra la nueva empresa con las crecendiales del user_empresa actual
-        }
-        else if(in_array("ROLE_EMPRESA", $this->getUser()->getRoles())){
+        } else if (in_array("ROLE_EMPRESA", $this->getUser()->getRoles())) {
             return $this->redirectToRoute('linkedon_index');
-        }
-        else{
+        } else {
             return $this->redirectToRoute('linkedon_userloggedview');
         }
-
     }
 
     #[Route('/UserLoggedView', name: 'linkedon_userloggedview')]

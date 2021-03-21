@@ -16,18 +16,16 @@ export default {
     name: "ModalOferta",
     props: {
         ofertaSeleccionada: Object,
-    },
-    data() {
-        return {
-            boxTwo: "",
-        };
+        userLogged: Object,
     },
     methods: {
         enviarCV() {
             this.boxTwo = "";
+            console.log("ofertaSeleccionada_id", this.ofertaSeleccionada.id);
+            console.log("userLogged_id", this.userLogged.id);
             this.$bvModal
                 .msgBoxConfirm("¿Seguro que quieres enviar el CV?.", {
-                    title: "Please Confirm",
+                    title: "Porfavor confirma",
                     size: "sm",
                     buttonSize: "sm",
                     okVariant: "danger",
@@ -38,21 +36,35 @@ export default {
                     centered: true,
                 })
                 .then((value) => {
-                    this.boxTwo = value;
                     if (true == value) {
-                        this.$bvModal.hide("modal-oferta");
-                        this.axios({
-                            method: "post",
-                            url:
-                                "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta_candidat",
-                            headers: {},
-                            data: {
-                                oferta_id: this.ofertaSeleccionada.id,
-                                candidat_id: 1,
-                            },
-                        }).then(function(response) {
-                            console.log("oferta_candidad", response);
-                        });
+                        this.axios
+                            .get(
+                                "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/candidat?filter=usuari_id,eq," +
+                                    this.userLogged.id
+                            )
+                            .then((response1) => {
+                                console.log(
+                                    "candidat_id",
+                                    response1.data.records[0].id
+                                );
+                                this.axios({
+                                    method: "post",
+                                    url: "/api/setOfertaCandidat",
+                                    // "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta_candidat",
+                                    headers: {},
+                                    data: {
+                                        oferta_id: this.ofertaSeleccionada.id,
+                                        candidat_id:
+                                            response1.data.records[0].id,
+                                    },
+                                }).then(function(response2) {
+                                    console.log(
+                                        "post_oferta_candidat",
+                                        response2
+                                    );
+                                    this.$bvModal.hide("modal-oferta");
+                                });
+                            });
                     }
                 })
                 .catch((err) => {
