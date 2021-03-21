@@ -28,7 +28,7 @@ class EmpresaController extends AbstractController
         $empresa = new Empresa();
         $userLogged = $this->getUser();
         // Hacemos set al objeto empresa con los datos de la empresa logeado actualmente para poder hacer las foreign keys
-        $empresa->setCorreu($userLogged->getEmail()); // Si pilla el correo del user logeado
+        $empresa->setCorreu($userLogged->getEmail()); // Se pilla el correo del user logeado
         $empresa->setUsuari($userLogged); // Se pilla el user logeado (por defecto va a buscar el metodo _toString de User y obtiene el id)
         $form = $this->createForm(EmpresaType::class, $empresa);
         $form->handleRequest($request);

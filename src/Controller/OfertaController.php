@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Categoria;
+use App\Entity\Empresa;
 use App\Entity\Oferta;
 use App\Form\OfertaType;
 use App\Repository\OfertaRepository;
@@ -27,6 +28,12 @@ class OfertaController extends AbstractController
         $ofertum = new Oferta();
         $ofertum->setDataPublicacio(new \DateTime());
         $ofertum->setEstat(0);
+
+        // Pillamos la empresa actualmente logeada y la seteamos en la oferta
+        $empresa = $this->getDoctrine()->getRepository(Empresa::class)->findOneBy(['usuari' => $this->getUser()->getId()]);
+        $ofertum->setEmpresa($empresa);
+
+        $entityManager = $this->getDoctrine()->getManager();
         $form = $this->createForm(OfertaType::class, $ofertum);
         $form->handleRequest($request);
 
