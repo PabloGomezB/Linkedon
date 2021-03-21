@@ -4,17 +4,22 @@
 
         <SelectCategoria></SelectCategoria>
 
-        <div>
+        <div v-if="hasUser">
             <b-card-group deck>
                 <Oferta
                     v-for="oferta in resultadoOfertas"
                     :key="oferta.id"
                     :oferta="oferta"
+                    :userLogged="userLogged"
                 ></Oferta>
             </b-card-group>
         </div>
 
-        <ModalOferta :ofertaSeleccionada="ofertaSeleccionada"></ModalOferta>
+        <ModalOferta
+            v-if="hasUser"
+            :ofertaSeleccionada="ofertaSeleccionada"
+            :userLogged="userLogged"
+        ></ModalOferta>
     </div>
 </template>
 
@@ -34,7 +39,16 @@ export default {
         return {
             resultadoOfertas: {},
             ofertaSeleccionada: {},
+            userLogged: {},
+            hasUser: false,
         };
+    },
+    mounted() {
+        this.axios.get("/api/getUserLogged").then((response) => {
+            console.log("userLogged", response.data);
+            this.userLogged = response.data;
+            this.hasUser = true;
+        });
     },
 };
 </script>

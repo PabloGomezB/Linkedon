@@ -16,6 +16,7 @@ export default {
     name: "ModalOferta",
     props: {
         ofertaSeleccionada: Object,
+        userLogged: Object,
     },
     data() {
         return {
@@ -27,7 +28,7 @@ export default {
             this.boxTwo = "";
             this.$bvModal
                 .msgBoxConfirm("¿Seguro que quieres enviar el CV?.", {
-                    title: "Please Confirm",
+                    title: "Porfavor confirma",
                     size: "sm",
                     buttonSize: "sm",
                     okVariant: "danger",
