@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Empresa;
 use App\Form\EmpresaType;
 use App\Repository\EmpresaRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +26,10 @@ class EmpresaController extends AbstractController
     public function new(Request $request): Response
     {
         $empresa = new Empresa();
+        $userLogged = $this->getUser();
+        // Hacemos set al objeto empresa con los datos de la empresa logeado actualmente para poder hacer las foreign keys
+        $empresa->setCorreu($userLogged->getEmail()); // Si pilla el correo del user logeado
+        $empresa->setUsuari($userLogged); // Se pilla el user logeado (por defecto va a buscar el metodo _toString de User y obtiene el id)
         $form = $this->createForm(EmpresaType::class, $empresa);
         $form->handleRequest($request);
 
@@ -33,7 +38,8 @@ class EmpresaController extends AbstractController
             $entityManager->persist($empresa);
             $entityManager->flush();
 
-            return $this->redirectToRoute('empresa_index');
+            // Intenté hacer update desde aquí a User pero se quejaba, por eso redirecciono a su controlador
+            return $this->redirectToRoute('user_verify'); // Redirect al UserController donde se quitará el ROLE_UNVERIFIED al user actual
         }
 
         return $this->render('empresa/new.html.twig', [

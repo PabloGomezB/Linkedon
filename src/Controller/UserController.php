@@ -21,6 +21,27 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[Route('/verify', name: 'user_verify')]
+    public function update(): Response
+    {
+        // SYMFONY HACE LOGOUT AL CAMBIAR LOS ROLES POR UN TEMA DE SEGURIDAD
+        // SE PUEDE EVITAR HACIENDO NOSE QUE CON LOS TOKENS
+        // MIRAR COMO CAMBIAR EL ROL SIN QUE HAGA LOGOUT
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(User::class)->find($this->getUser());
+
+        if (!$user) {
+            throw $this->createNotFoundException(
+                'Error con el user. No existe el usuario (estoy en UserController)'
+            );
+        }
+
+        $user->setRoles(array('ROLE_EMPRESA'));
+        $entityManager->flush();
+
+        return $this->redirectToRoute('oferta_new');
+    }
+
     #[Route('/new', name: 'user_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {

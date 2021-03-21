@@ -32,10 +32,9 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            // echo '<script>console.log("'.$form->get('empresa')->getData().'")</script>';
-            // Si en el registro ha marcado el checkbox de empresa, asigna rol de empresa
+            // Si en el registro ha marcado el checkbox de empresa, asigna rol de empresa y unverified para que pase al registro como empresa
             if ($form->get('checkbox')->getData() == 1){
-                $user->setRoles(array('ROLE_EMPRESA'));
+                $user->setRoles(array('ROLE_EMPRESA','ROLE_UNVERIFIED'));
             }
             else{
                 $user->setRoles(array('ROLE_USER'));

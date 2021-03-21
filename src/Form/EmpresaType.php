@@ -15,7 +15,9 @@ class EmpresaType extends AbstractType
             ->add('nom')
             ->add('tipus')
             // ->add('logo')
-            ->add('correu')
+            ->add('correu', null, [
+                'attr' => array('readonly' => 'true') // si pones disabled no pilla la data y lo guarda NULL en la DB
+            ])
             // ->add('usuari')
         ;
     }
