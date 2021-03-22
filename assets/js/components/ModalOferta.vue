@@ -20,7 +20,6 @@ export default {
     },
     methods: {
         enviarCV() {
-            this.boxTwo = "";
             console.log("ofertaSeleccionada_id", this.ofertaSeleccionada.id);
             console.log("userLogged_id", this.userLogged.id);
             this.$bvModal
@@ -57,18 +56,19 @@ export default {
                                         candidat_id:
                                             response1.data.records[0].id,
                                     },
-                                }).then(function(response2) {
+                                }).then((response2) => {
                                     console.log(
                                         "post_oferta_candidat",
                                         response2
                                     );
                                     this.$bvModal.hide("modal-oferta");
+                                    this.$emit("forceRerenderEvent");
                                 });
                             });
                     }
                 })
                 .catch((err) => {
-                    // An error occurred
+                    console.log("err", err);
                 });
         },
     },

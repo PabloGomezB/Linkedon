@@ -2,10 +2,10 @@
     <div>
         <h1>Ofertas por categorias</h1>
 
-        <SelectCategoria></SelectCategoria>
+        <SelectCategoria @getOfertasEvent="getOfertas()"></SelectCategoria>
 
         <div v-if="hasUser">
-            <b-card-group deck>
+            <b-card-group deck :key="componentKey">
                 <Oferta
                     v-for="oferta in resultadoOfertas"
                     :key="oferta.id"
@@ -19,6 +19,8 @@
             v-if="hasUser"
             :ofertaSeleccionada="ofertaSeleccionada"
             :userLogged="userLogged"
+            @getOfertasEvent="getOfertas()"
+            @forceRerenderEvent="forceRerender()"
         ></ModalOferta>
     </div>
 </template>
@@ -41,14 +43,43 @@ export default {
             ofertaSeleccionada: {},
             userLogged: {},
             hasUser: false,
+            componentKey: 0,
         };
     },
+    methods: {
+        getOfertas() {
+            this.axios
+                .get(
+                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?filter=data_publicacio,gt," +
+                        this.getDate3MonthsSubstracted()
+                )
+                .then((response) => {
+                    console.log("ofertas por categorias", response);
+                    this.resultadoOfertas = response.data.records;
+                });
+        },
+        getDate3MonthsSubstracted() {
+            let date = new Date();
+            date.setMonth(date.getMonth() - 3);
+            let month = date.getMonth() + 1;
+            let day = date.getDate();
+            let year = date.getFullYear();
+            return year + "/" + month + "/" + day;
+        },
+        getUserLogged() {
+            this.axios.get("/api/getUserLogged").then((response) => {
+                console.log("userLogged", response.data);
+                this.userLogged = response.data;
+                this.hasUser = true;
+            });
+        },
+        forceRerender() {
+            this.componentKey += 1;
+        },
+    },
     mounted() {
-        this.axios.get("/api/getUserLogged").then((response) => {
-            console.log("userLogged", response.data);
-            this.userLogged = response.data;
-            this.hasUser = true;
-        });
+        this.getUserLogged();
+        this.getOfertas();
     },
 };
 </script>
