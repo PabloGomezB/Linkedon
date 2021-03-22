@@ -8,7 +8,7 @@
 		<div class="collapse navbar-collapse" id="mobile-nav">
 			<ul class="navbar-nav ml-auto">
 
-				{% if is_granted("ROLE_EMPRESA") %}
+				{% if is_granted("ROLE_ADMIN") %}
 				<li class="nav-item mr-5">
 					<a href="/oferta/new" class="nav-link" style="color:white;">Empresa</a>
 				</li>

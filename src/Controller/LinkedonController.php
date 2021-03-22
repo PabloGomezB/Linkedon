@@ -12,7 +12,7 @@ class LinkedonController extends AbstractController {
     public function index(): Response {
 
         if (is_object($this->get('security.token_storage')->getToken()->getUser())) {
-            return $this->redirectToRoute('linkedon_userloggedview');
+            return $this->redirectToRoute('linkedon_defineRol');
         }
 
         return $this->render('index.html.twig', [
@@ -28,13 +28,16 @@ class LinkedonController extends AbstractController {
             return $this->redirectToRoute('app_login');
         }
 
-        if (in_array("ROLE_UNVERIFIED", $this->getUser()->getRoles())) {
+        if(in_array("ROLE_UNVERIFIED", $this->getUser()->getRoles())){
             return $this->redirectToRoute('empresa_new'); // En este controlador se registra la nueva empresa con las crecendiales del user_empresa actual
-        } else if (in_array("ROLE_EMPRESA", $this->getUser()->getRoles())) {
-            return $this->redirectToRoute('linkedon_index');
-        } else {
+        }
+        else if(in_array("ROLE_EMPRESA", $this->getUser()->getRoles())){
+            return $this->redirectToRoute('oferta_new');
+        }
+        else{
             return $this->redirectToRoute('linkedon_userloggedview');
         }
+
     }
 
     #[Route('/UserLoggedView', name: 'linkedon_userloggedview')]
