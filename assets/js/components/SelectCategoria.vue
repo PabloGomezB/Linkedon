@@ -20,7 +20,7 @@ export default {
     methods: {
         getOfertasPorCategoria() {
             if (this.selected == null) {
-                this.getOfertas();
+                this.$emit("getOfertasEvent");
             } else {
                 this.axios
                     .get(
@@ -39,17 +39,7 @@ export default {
                     });
             }
         },
-        getOfertas() {
-            this.axios
-                .get(
-                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?filter=data_publicacio,gt," +
-                        this.getDate3MonthsSubstracted()
-                )
-                .then((response) => {
-                    console.log("ofertas por categorias", response);
-                    this.$parent.resultadoOfertas = response.data.records;
-                });
-        },
+
         getCategorias() {
             this.axios
                 .get(
@@ -75,7 +65,6 @@ export default {
         },
     },
     mounted() {
-        this.getOfertas();
         this.getCategorias();
     },
 };

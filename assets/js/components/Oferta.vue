@@ -2,7 +2,7 @@
     <b-card
         :header="oferta.titol"
         v-b-modal.modal-oferta
-        @click="abrirModal"
+        @click="pasarInfoOferta"
         :border-variant="color15"
         :bg-variant="colorJoinBody"
         :text-variant="colorJoinText"
@@ -33,7 +33,7 @@ export default {
         };
     },
     methods: {
-        abrirModal() {
+        pasarInfoOferta() {
             this.$parent.ofertaSeleccionada = this.oferta;
         },
         getDate15daysSubstracted() {
