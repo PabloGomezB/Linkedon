@@ -35,10 +35,24 @@ security:
             # switch_user: true
     role_hierarchy:
         ROLE_ADMIN: [ROLE_USER, ROLE_EMPRESA]
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
+    # Las siguientes rutas tienen que ir de más a menos específicas. Symfony las lee por orden de arriba a bajo
+    # En el ultimo nivel por ejemplo se niega el acceso a TODA la aplicacion a quienes no sean admin
+    # Eso quiere decir que si alguien intenta acceder a una ruta QUE AQUÍ NO ESTÉ ESPECIFICADA no podrá si no es admin
+    # Este orden permite que una empresa pueda acceder a /oferta/new pero no a oferta/
     access_control:
-        - { path: ^/*, roles: [ROLE_ADMIN] }
-        - { path: ^/oferta, roles: [ROLE_ADMIN, ROLE_EMPRESA] }
-        - { path: ^/, role: [IS_AUTHENTICATED_ANONYMOUSLY] }
-        # - { path: ^/profile, roles: ROLE_USER }
+        ## Rutas CRUD
+        # Empresa
+        - { path: ^/oferta/new, roles: [ROLE_ADMIN, ROLE_EMPRESA] }
+        - { path: ^/empresa/new, roles: [ROLE_ADMIN, ROLE_EMPRESA] }
+        # User
+        - { path: ^/UserLoggedView, role: [ROLE_ADMIN, ROLE_USER] }
+        - { path: ^/api, role: [ROLE_ADMIN, ROLE_USER] } #Api de Jordi para mostrar e inscribirse a ofertas
+        ## Rutas login/registro
+        - { path: ^/defineRol, role: [IS_AUTHENTICATED_FULLY] } # Los logeados se redirigen según su rol
+        - { path: ^/user/verify, role: [ROLE_EMPRESA] } # Las empresas deben verificarse despues de registrarse
+        - { path: ^/logout, role: [IS_AUTHENTICATED_FULLY] } # Todos los logeados pueden entrar a /logout
+        - { path: ^/login, role: [IS_AUTHENTICATED_ANONYMOUSLY] } # SOLO los que no están logeados entran a /login
+        - { path: ^/register, role: [IS_AUTHENTICATED_ANONYMOUSLY] } # SOLO los que no están logeados entran a /register
+        ## Nivel mas restrictivo
+        - { path: ^/(.+), roles: ROLE_ADMIN } # Todas las rutas son solo accesibles para admin
+        - { path: ^/, role: [IS_AUTHENTICATED_ANONYMOUSLY] } # Abrimos el index para cualquier user

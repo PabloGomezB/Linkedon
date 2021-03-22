@@ -13,7 +13,7 @@ class SecurityController extends AbstractController {
      */
     public function login(AuthenticationUtils $authenticationUtils): Response {
         if (is_object($this->get('security.token_storage')->getToken()->getUser())) {
-            return $this->redirectToRoute('linkedon_userloggedview');
+            return $this->redirectToRoute('linkedon_defineRol');
         }
 
         // get the login error if there is one
