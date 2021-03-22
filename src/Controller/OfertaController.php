@@ -41,8 +41,6 @@ class OfertaController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($ofertum);
             $entityManager->flush();
-            // PILLAR CORREO
-            // echo '<script>console.log("'.$ofertum->getEmpresa()->getCorreu().'")</script>';
             return $this->redirectToRoute('linkedon_index');
         }
 
