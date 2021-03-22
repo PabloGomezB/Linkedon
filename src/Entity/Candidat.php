@@ -10,8 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=CandidatRepository::class)
  */
-class Candidat
-{
+class Candidat {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -40,7 +39,7 @@ class Candidat
     private $telefon;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="candidat", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $usuari;
@@ -50,77 +49,64 @@ class Candidat
      */
     private $ofertes;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->ofertes = new ArrayCollection();
     }
 
-    public function __toString()
-    {
+    public function __toString() {
         // TODO: Implement __toString() method.
         return $this->nom;
     }
 
-    public function getId(): ?int
-    {
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function getNom(): ?string
-    {
+    public function getNom(): ?string {
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
-    {
+    public function setNom(string $nom): self {
         $this->nom = $nom;
 
         return $this;
     }
 
-    public function getCognom1(): ?string
-    {
+    public function getCognom1(): ?string {
         return $this->cognom1;
     }
 
-    public function setCognom1(string $cognom1): self
-    {
+    public function setCognom1(string $cognom1): self {
         $this->cognom1 = $cognom1;
 
         return $this;
     }
 
-    public function getCognom2(): ?string
-    {
+    public function getCognom2(): ?string {
         return $this->cognom2;
     }
 
-    public function setCognom2(string $cognom2): self
-    {
+    public function setCognom2(string $cognom2): self {
         $this->cognom2 = $cognom2;
 
         return $this;
     }
 
-    public function getTelefon(): ?int
-    {
+    public function getTelefon(): ?int {
         return $this->telefon;
     }
 
-    public function setTelefon(?int $telefon): self
-    {
+    public function setTelefon(?int $telefon): self {
         $this->telefon = $telefon;
 
         return $this;
     }
 
-    public function getUsuari(): ?User
-    {
+    public function getUsuari(): ?User {
         return $this->usuari;
     }
 
-    public function setUsuari(User $usuari): self
-    {
+    public function setUsuari(User $usuari): self {
         $this->usuari = $usuari;
 
         return $this;
@@ -129,13 +115,11 @@ class Candidat
     /**
      * @return Collection|Oferta[]
      */
-    public function getOfertes(): Collection
-    {
+    public function getOfertes(): Collection {
         return $this->ofertes;
     }
 
-    public function addOferte(Oferta $oferte): self
-    {
+    public function addOferte(Oferta $oferte): self {
         if (!$this->ofertes->contains($oferte)) {
             $this->ofertes[] = $oferte;
             $oferte->addCandidat($this);
@@ -144,8 +128,7 @@ class Candidat
         return $this;
     }
 
-    public function removeOferte(Oferta $oferte): self
-    {
+    public function removeOferte(Oferta $oferte): self {
         if ($this->ofertes->removeElement($oferte)) {
             $oferte->removeCandidat($this);
         }

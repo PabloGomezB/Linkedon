@@ -10,8 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=OfertaRepository::class)
  */
-class Oferta
-{
+class Oferta {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -61,89 +60,74 @@ class Oferta
      */
     private $categoria;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->candidats = new ArrayCollection();
     }
 
-    public function __toString()
-    {
+    public function __toString() {
         // TODO: Implement __toString() method.
         return $this->titol;
     }
 
-    public function getId(): ?int
-    {
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function getTitol(): ?string
-    {
+    public function getTitol(): ?string {
         return $this->titol;
     }
 
-    public function setTitol(string $titol): self
-    {
+    public function setTitol(string $titol): self {
         $this->titol = $titol;
 
         return $this;
     }
 
-    public function getDescripcio(): ?string
-    {
+    public function getDescripcio(): ?string {
         return $this->descripcio;
     }
 
-    public function setDescripcio(string $descripcio): self
-    {
+    public function setDescripcio(string $descripcio): self {
         $this->descripcio = $descripcio;
 
         return $this;
     }
 
-    public function getDataPublicacio(): ?\DateTimeInterface
-    {
+    public function getDataPublicacio(): ?\DateTimeInterface {
         return $this->dataPublicacio;
     }
 
-    public function setDataPublicacio(\DateTimeInterface $dataPublicacio): self
-    {
+    public function setDataPublicacio(\DateTimeInterface $dataPublicacio): self {
         $this->dataPublicacio = $dataPublicacio;
 
         return $this;
     }
 
-    public function getUbicacio(): ?string
-    {
+    public function getUbicacio(): ?string {
         return $this->ubicacio;
     }
 
-    public function setUbicacio(string $ubicacio): self
-    {
+    public function setUbicacio(string $ubicacio): self {
         $this->ubicacio = $ubicacio;
 
         return $this;
     }
 
-    public function getEstat(): ?int
-    {
+    public function getEstat(): ?int {
         return $this->estat;
     }
 
-    public function setEstat(int $estat): self
-    {
+    public function setEstat(int $estat): self {
         $this->estat = $estat;
 
         return $this;
     }
 
-    public function getEmpresa(): ?Empresa
-    {
+    public function getEmpresa(): ?Empresa {
         return $this->empresa;
     }
 
-    public function setEmpresa(?Empresa $empresa): self
-    {
+    public function setEmpresa(?Empresa $empresa): self {
         $this->empresa = $empresa;
 
         return $this;
@@ -152,13 +136,11 @@ class Oferta
     /**
      * @return Collection|Candidat[]
      */
-    public function getCandidats(): Collection
-    {
+    public function getCandidats(): Collection {
         return $this->candidats;
     }
 
-    public function addCandidat(Candidat $candidat): self
-    {
+    public function addCandidat(Candidat $candidat): self {
         if (!$this->candidats->contains($candidat)) {
             $this->candidats[] = $candidat;
         }
@@ -166,20 +148,17 @@ class Oferta
         return $this;
     }
 
-    public function removeCandidat(Candidat $candidat): self
-    {
+    public function removeCandidat(Candidat $candidat): self {
         $this->candidats->removeElement($candidat);
 
         return $this;
     }
 
-    public function getCategoria(): ?Categoria
-    {
+    public function getCategoria(): ?Categoria {
         return $this->categoria;
     }
 
-    public function setCategoria(?Categoria $categoria): self
-    {
+    public function setCategoria(?Categoria $categoria): self {
         $this->categoria = $categoria;
 
         return $this;
