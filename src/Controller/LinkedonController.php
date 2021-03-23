@@ -29,7 +29,12 @@ class LinkedonController extends AbstractController {
         }
 
         if(in_array("ROLE_UNVERIFIED", $this->getUser()->getRoles())){
-            return $this->redirectToRoute('empresa_new'); // En este controlador se registra la nueva empresa con las crecendiales del user_empresa actual
+            if (in_array("ROLE_EMPRESA", $this->getUser()->getRoles())){ // Si además tiene el rol de empresa
+                return $this->redirectToRoute('empresa_new'); // En este controlador se registra la nueva empresa con las crecendiales del user_empresa actual
+            }
+            else{ // Sino tiene el rol de user
+                return $this->redirectToRoute('candidat_new');
+            }
         }
         else if(in_array("ROLE_EMPRESA", $this->getUser()->getRoles())){
             return $this->redirectToRoute('oferta_new');

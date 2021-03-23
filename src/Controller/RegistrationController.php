@@ -37,7 +37,7 @@ class RegistrationController extends AbstractController
                 $user->setRoles(array('ROLE_EMPRESA','ROLE_UNVERIFIED'));
             }
             else{
-                $user->setRoles(array('ROLE_USER'));
+                $user->setRoles(array('ROLE_USER', 'ROLE_UNVERIFIED'));
             }
 
             $entityManager = $this->getDoctrine()->getManager();

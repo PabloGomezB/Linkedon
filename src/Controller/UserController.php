@@ -30,35 +30,46 @@ class UserController extends AbstractController
     #[Route('/verify', name: 'user_verify')]
     public function update(): Response
     {
-        // Guardamos las credenciales del usuario actualmente logeado (user-empresa con ROLE_UNVERIFIED)
+        // Guardamos las credenciales del usuario actualmente logeado (user con ROLE_UNVERIFIED)
         $user = $this->getUser();
+        $isEmpresa = false;
 
-        // Preparamos para modificar el user en la base de datos
-        $entityManager = $this->getDoctrine()->getManager();
-        $user = $entityManager->getRepository(User::class)->find($this->getUser());
+        if(in_array("ROLE_UNVERIFIED", $user->getRoles())){
+            // Preparamos para modificar el user en la base de datos
+            $entityManager = $this->getDoctrine()->getManager();
+            $user = $entityManager->getRepository(User::class)->find($this->getUser());
 
-        if (!$user) {
-            throw $this->createNotFoundException(
-                'Error con el user. No existe el usuario (estoy en UserController)'
-            );
+            if (!$user) {
+                throw $this->createNotFoundException(
+                    'Error con el user. No existe el usuario (estoy en UserController)'
+                );
+            }
+
+            // Le quitamos el ROLE_UNVERIFIED sobreescribiendole el rol correspondiente
+            if (in_array("ROLE_EMPRESA", $user->getRoles())){
+                $user->setRoles(array('ROLE_EMPRESA'));
+            }
+            else{
+                $user->setRoles(array('ROLE_USER'));
+            }
+
+            // Actualizamos el user actual con el nuevo rol en la base de datos y por consiguiente symfony nos hace logout
+            $entityManager->flush();
+            // Si ahora hacemos $this->getUser(); para obtener la info del ususario que hemos modificado daría error porque ya no hay sesion activa.
+            
+            // Creamos token de seguridad con la info del user previamente obtenida
+            $token = new UsernamePasswordToken($user, $user->getPassword(), "main", $user->getRoles());// Here, "main" is the name of the firewall in your security.yml
+            // Seteamos el token
+            $this->container->get('security.token_storage')->setToken($token);
+            // Y lo registramos en la sesion actual (logeamos)
+            $this->container->get('session')->set('_security_main', serialize($token));
+
+            // Finalmente redirigimos al user donde corresponda
+            if ($isEmpresa === true){
+                return $this->redirectToRoute('oferta_new');
+            }
+            return $this->redirectToRoute('linkedon_defineRol');            
         }
-
-        // Le quitamos el ROLE_UNVERIFIED
-        $user->setRoles(array('ROLE_EMPRESA'));
-
-        // Actualizamos el user actual con el nuevo rol en la base de datos y por consiguiente symfony nos hace logout
-        $entityManager->flush();
-        // Si ahora hacemos $this->getUser(); para obtener la info del ususario que hemos modificado daría error porque ya no hay sesion activa.
-        
-        // Creamos token de seguridad con la info del user previamente obtenida
-        $token = new UsernamePasswordToken($user, $user->getPassword(), "main", $user->getRoles());// Here, "main" is the name of the firewall in your security.yml
-        // Seteamos el token
-        $this->container->get('security.token_storage')->setToken($token);
-        // Y lo registramos en la sesion actual (logeamos)
-        $this->container->get('session')->set('_security_main', serialize($token));
-
-        // Finalmente redirigimos a la empresa al forumulario para crear una oferta
-        return $this->redirectToRoute('oferta_new');
     }
 
     #[Route('/new', name: 'user_new', methods: ['GET', 'POST'])]

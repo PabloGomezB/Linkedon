@@ -54,8 +54,7 @@ export default {
                                     headers: {},
                                     data: {
                                         oferta_id: this.ofertaSeleccionada.id,
-                                        candidat_id:
-                                            response1.data.records[0].id,
+                                        candidat_id: response1.data.records[0].id,
                                     },
                                 }).then(function(response2) {
                                     console.log(
