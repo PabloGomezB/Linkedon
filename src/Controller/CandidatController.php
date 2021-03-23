@@ -25,6 +25,8 @@ class CandidatController extends AbstractController
     public function new(Request $request): Response
     {
         $candidat = new Candidat();
+        $userLogged = $this->getUser();
+        $candidat->setUsuari($userLogged);
         $form = $this->createForm(CandidatType::class, $candidat);
         $form->handleRequest($request);
 
@@ -33,7 +35,7 @@ class CandidatController extends AbstractController
             $entityManager->persist($candidat);
             $entityManager->flush();
 
-            return $this->redirectToRoute('candidat_index');
+            return $this->redirectToRoute('user_verify');
         }
 
         return $this->render('candidat/new.html.twig', [
