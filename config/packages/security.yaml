@@ -43,14 +43,14 @@ security:
         ## Rutas CRUD
         # Empresa
         - { path: ^/oferta/new, roles: [ROLE_ADMIN, ROLE_EMPRESA] }
-        - { path: ^/empresa/new, roles: [ROLE_ADMIN, ROLE_EMPRESA] }
+        - { path: ^/empresa/new, roles: [ROLE_ADMIN, ROLE_EMPRESA] } # Tambien desde el controler se evita que pueda volver a entrar estando logedado
         # User
-        - { path: ^/candidat/new, role: [ROLE_ADMIN, ROLE_USER] }
-        - { path: ^/UserLoggedView, role: [ROLE_ADMIN, ROLE_USER] }
+        - { path: ^/candidat/new, role: [ROLE_ADMIN, ROLE_USER] }  # Tambien desde el controler se evita que pueda volver a entrar estando logedado
+        - { path: ^/UserLoggedView, role: [ROLE_ADMIN, ROLE_USER] } # No se porque desde aqui no funciona (se controla desde LinkedonController)
         - { path: ^/api, role: [ROLE_ADMIN, ROLE_USER] } #Api de Jordi para mostrar e inscribirse a ofertas
         ## Rutas login/registro
         - { path: ^/defineRol, role: [IS_AUTHENTICATED_FULLY] } # Los logeados se redirigen según su rol
-        - { path: ^/user/verify, role: [ROLE_EMPRESA, ROLE_USER] } # Las empresas deben verificarse despues de registrarse
+        - { path: ^/user/verify, role: [ROLE_UNVERIFIED] } # Las empresas deben verificarse despues de registrarse
         - { path: ^/logout, role: [IS_AUTHENTICATED_FULLY] } # Todos los logeados pueden entrar a /logout
         - { path: ^/login, role: [IS_AUTHENTICATED_ANONYMOUSLY] } # SOLO los que no están logeados entran a /login
         - { path: ^/register, role: [IS_AUTHENTICATED_ANONYMOUSLY] } # SOLO los que no están logeados entran a /register

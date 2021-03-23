@@ -48,6 +48,10 @@ class LinkedonController extends AbstractController {
     #[Route('/UserLoggedView', name: 'linkedon_userloggedview')]
     public function userLoggedView(): Response {
 
+        foreach ($this->getUser()->getRoles() as $result) {
+            echo $result."<br>"; 
+        }
+      
         if (!is_object($this->get('security.token_storage')->getToken()->getUser())) {
             return $this->redirectToRoute('app_login');
         }

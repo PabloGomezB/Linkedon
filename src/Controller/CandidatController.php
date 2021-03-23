@@ -24,6 +24,8 @@ class CandidatController extends AbstractController
     #[Route('/new', name: 'candidat_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN','ROLE_UNVERIFIED');
+
         $candidat = new Candidat();
         $userLogged = $this->getUser();
         $candidat->setUsuari($userLogged);
