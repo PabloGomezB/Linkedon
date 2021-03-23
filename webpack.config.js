@@ -10,9 +10,17 @@ Encore
     // directory where compiled assets will be stored
     .setOutputPath("public/build/")
     // public path used by the web server to access the output path
-    .setPublicPath("/build")
+    .setPublicPath("/~a18pabgombra/Linkedon/public/build")
     // only needed for CDN's or sub-directory deploy
-    // .setManifestKeyPrefix("build/")
+    .setManifestKeyPrefix("public/build/")
+
+// // directory where compiled assets will be stored
+// .setOutputPath("public/build/")
+// // public path used by the web server to access the output path
+// .setPublicPath("/~a18pabgombra/Linkedon/public/build")
+// // only needed for CDN's or sub-directory deploy
+// .setManifestKeyPrefix("build")
+
 
     /*
      * ENTRY CONFIG

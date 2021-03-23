@@ -14,7 +14,10 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
-#[Route('/user')]
+/**
+ * @Route ("/user")
+ */
+// #[Route('/user')]
 class UserController extends AbstractController
 {
     #[Route('/', name: 'user_index', methods: ['GET'])]
@@ -27,7 +30,10 @@ class UserController extends AbstractController
 
     // Problema: Al modificar el user actual symfony hace logout automatico por seguridad
     // Solución: Guardamos la info del user actual y forzamos al login con la misma info despues de cambiar la base de datos
-    #[Route('/verify', name: 'user_verify')]
+    /**
+     * @Route("/verify", name="user_verify")
+     */
+    // #[Route('/verify', name: 'user_verify')]
     public function update(): Response
     {
         // Guardamos las credenciales del usuario actualmente logeado (user con ROLE_UNVERIFIED)
@@ -72,7 +78,10 @@ class UserController extends AbstractController
         }
     }
 
-    #[Route('/new', name: 'user_new', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/new", name="user_new", methods={"GET","POST"})
+     */
+    // #[Route('/new', name: 'user_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $user = new User();
@@ -93,7 +102,10 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'user_show', methods: ['GET'])]
+    /**
+     * @Route("/{id}", name="user_show", methods={"GET"})
+     */
+    // #[Route('/{id}', name: 'user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
         return $this->render('user/show.html.twig', [

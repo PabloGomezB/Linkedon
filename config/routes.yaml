@@ -1,6 +1,9 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+   path: /
+   controller: App\Controller\LinkedonController::index
+   defaults:
+        path: 'http://labs.iam.cat/~a18pabgombra/Linkedon'
+        permanent: true
 app_logout:
     path: /logout
     methods: GET
