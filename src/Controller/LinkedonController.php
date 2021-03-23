@@ -8,7 +8,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LinkedonController extends AbstractController {
 
-    #[Route('/', name: 'linkedon_index')]
+    /**
+     * @Route ("/", name="linkedon_index")
+     */
+    // #[Route('/', name: 'linkedon_index')]
     public function index(): Response {
 
         if (is_object($this->get('security.token_storage')->getToken()->getUser())) {
