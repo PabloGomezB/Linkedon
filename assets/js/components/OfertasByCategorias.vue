@@ -1,27 +1,26 @@
 <template>
-    <div>
+    <div v-if="hasUser">
         <h1>Ofertas por categorias</h1>
-
         <SelectCategoria @getOfertasEvent="getOfertas()"></SelectCategoria>
-
-        <div v-if="hasUser">
-            <b-card-group deck :key="componentKey">
+        <div class="mt-3">
+            <b-row :key="componentKey" align-v="stretch">
                 <Oferta
                     v-for="oferta in resultadoOfertas"
                     :key="oferta.id"
                     :oferta="oferta"
                     :userLogged="userLogged"
                 ></Oferta>
-            </b-card-group>
+            </b-row>
         </div>
-
         <ModalOferta
-            v-if="hasUser"
             :ofertaSeleccionada="ofertaSeleccionada"
             :userLogged="userLogged"
             @getOfertasEvent="getOfertas()"
             @forceRerenderEvent="forceRerender()"
         ></ModalOferta>
+    </div>
+    <div v-else class="text-center mt-5">
+        <b-spinner label="Loading..."></b-spinner>
     </div>
 </template>
 
@@ -50,7 +49,7 @@ export default {
         getOfertas() {
             this.axios
                 .get(
-                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?filter=data_publicacio,gt," +
+                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?order=id,asc&filter=data_publicacio,gt," +
                         this.getDate3MonthsSubstracted()
                 )
                 .then((response) => {

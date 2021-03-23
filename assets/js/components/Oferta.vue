@@ -1,24 +1,27 @@
 <template>
-    <b-card
-        :header="oferta.titol"
-        v-b-modal.modal-oferta
-        @click="pasarInfoOferta"
-        :border-variant="color15"
-        :bg-variant="colorJoinBody"
-        :text-variant="colorJoinText"
-    >
-        <b-card-text>
-            <p>
-                {{ oferta.descripcio }}
-            </p>
-        </b-card-text>
+    <b-col cols="12" sm="6" md="4" lg="3">
+        <b-card
+            :header="oferta.titol"
+            v-b-modal.modal-oferta
+            @click="pasarInfoOferta"
+            :border-variant="color15"
+            :bg-variant="colorJoinBody"
+            :text-variant="colorJoinText"
+            class="mb-3"
+        >
+            <b-card-text>
+                <p>
+                    {{ oferta.descripcio }}
+                </p>
+            </b-card-text>
 
-        <template #footer>
-            <small class="text-muted"
-                >Data publicació: {{ oferta.data_publicacio }}</small
-            >
-        </template>
-    </b-card>
+            <template #footer>
+                <small class="text-muted"
+                    >Data publicació: {{ oferta.data_publicacio }}</small
+                >
+            </template>
+        </b-card>
+    </b-col>
 </template>
 
 <script>

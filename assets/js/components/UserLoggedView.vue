@@ -1,20 +1,20 @@
 <template>
     <div>
         <OfertasByCategorias></OfertasByCategorias>
-        <ChartOfertas></ChartOfertas>
+        <!-- <ChartOfertas></ChartOfertas> -->
     </div>
 </template>
 
 <script>
 // import ListaOfertas from "./ListaOfertas";
 import OfertasByCategorias from "./OfertasByCategorias";
-import ChartOfertas from "./ChartOfertas";
+// import ChartOfertas from "./ChartOfertas";
 
 export default {
     name: "UserLoggedView",
     components: {
         OfertasByCategorias,
-        ChartOfertas,
+        // ChartOfertas,
     },
 };
 </script>
