@@ -2,16 +2,12 @@
     <div v-if="hasUser">
         <h1>Ofertas por categorias</h1>
         <SelectCategoria @getOfertasEvent="getOfertas()"></SelectCategoria>
-        <div class="mt-3">
-            <b-row :key="componentKey" align-v="stretch">
-                <Oferta
-                    v-for="oferta in resultadoOfertas"
-                    :key="oferta.id"
-                    :oferta="oferta"
-                    :userLogged="userLogged"
-                ></Oferta>
-            </b-row>
-        </div>
+        <Ofertas
+            :userLogged="userLogged"
+            :resultadoOfertas="resultadoOfertas"
+            :key="componentKey"
+        >
+        </Ofertas>
         <ModalOferta
             :ofertaSeleccionada="ofertaSeleccionada"
             :userLogged="userLogged"
@@ -27,13 +23,13 @@
 <script>
 import SelectCategoria from "./SelectCategoria";
 import ModalOferta from "./ModalOferta";
-import Oferta from "./Oferta";
+import Ofertas from "./Ofertas";
 
 export default {
     name: "OfertasByCategorias",
     components: {
         SelectCategoria,
-        Oferta,
+        Ofertas,
         ModalOferta,
     },
     data() {
@@ -49,7 +45,7 @@ export default {
         getOfertas() {
             this.axios
                 .get(
-                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?order=id,asc&filter=data_publicacio,gt," +
+                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?order=data_publicacio,asc&filter=data_publicacio,gt," +
                         this.getDate3MonthsSubstracted()
                 )
                 .then((response) => {

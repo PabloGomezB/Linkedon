@@ -37,7 +37,7 @@ export default {
     },
     methods: {
         pasarInfoOferta() {
-            this.$parent.ofertaSeleccionada = this.oferta;
+            this.$parent.$parent.ofertaSeleccionada = this.oferta;
         },
         getDate15daysSubstracted() {
             let date = new Date();

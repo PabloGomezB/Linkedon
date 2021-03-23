@@ -24,7 +24,7 @@ export default {
             } else {
                 this.axios
                     .get(
-                        "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?order=id,asc&filter=categoria_id,eq," +
+                        "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?order=data_publicacio,asc&filter=categoria_id,eq," +
                             this.selected +
                             "&filter=data_publicacio,gt," +
                             this.getDate3MonthsSubstracted()
