@@ -1,7 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Index{% endblock %}
+{% block title %}Index
+{% endblock %}
 
 {% block body %}
 	<div id="app"></div>
+	<canvas id="myChart" width="400" height="400"></canvas>
+	<script>
+		var ctx = document.getElementById("myChart").getContext("2d");
+var myChart = new Chart(ctx, {
+type: "bar",
+data: {
+labels: [
+'col1', 'col2', 'col3'
+],
+datasets: [
+{
+label: 'Num Datos',
+data: [10, 9, 17]
+}
+]
+}
+});
+	</script>
 {% endblock %}
