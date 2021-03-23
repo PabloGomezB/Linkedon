@@ -50,7 +50,7 @@ export default {
         getOfertas() {
             this.axios
                 .get(
-                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?order=data_publicacio,asc&filter=data_publicacio,gt," +
+                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?filter=data_publicacio,gt," +
                         this.getDate3MonthsSubstracted()
                 )
                 .then((response) => {
