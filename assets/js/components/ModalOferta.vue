@@ -5,8 +5,37 @@
             :title="ofertaSeleccionada.titol"
             hide-footer
         >
-            <p class="my-4">{{ ofertaSeleccionada.descripcio }}</p>
-            <b-button @click="enviarCV()" variant="primary">Enviar CV</b-button>
+            <b-container fluid>
+                <p>{{ ofertaSeleccionada.empresa_id.tipus }}</p>
+                <p>{{ ofertaSeleccionada.data_publicacio }}</p>
+                <p>{{ ofertaSeleccionada.ubicacio }}</p>
+                <p>{{ ofertaSeleccionada.descripcio }}</p>
+                <p>{{ ofertaSeleccionada.categoria_id.descripcio }}</p>
+
+                <b-form-checkbox
+                    v-model="status"
+                    value="accepted"
+                    unchecked-value="not_accepted"
+                    >Añadir carta de presentación
+                </b-form-checkbox>
+                <div v-if="status == 'accepted'">
+                    <b-form-textarea
+                        id="textarea"
+                        v-model="text"
+                        placeholder="Escribe algo..."
+                        rows="3"
+                        max-rows="6"
+                    ></b-form-textarea>
+                </div>
+            </b-container>
+            <div class="mt-3">
+                <b-button
+                    class="float-right"
+                    @click="enviarCV()"
+                    variant="primary"
+                    >Enviar CV</b-button
+                >
+            </div>
         </b-modal>
     </div>
 </template>
@@ -18,12 +47,17 @@ export default {
         ofertaSeleccionada: Object,
         userLogged: Object,
     },
+    data() {
+        return {
+            status: "not_accepted",
+        };
+    },
     methods: {
         enviarCV() {
             console.log("ofertaSeleccionada_id", this.ofertaSeleccionada.id);
             console.log("userLogged_id", this.userLogged.id);
             this.$bvModal
-                .msgBoxConfirm("¿Seguro que quieres enviar el CV?.", {
+                .msgBoxConfirm("¿Seguro que quieres enviar el CV?", {
                     title: "Porfavor confirma",
                     size: "sm",
                     buttonSize: "sm",

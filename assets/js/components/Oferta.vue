@@ -1,7 +1,8 @@
 <template>
-    <b-col cols="12" sm="6" md="4" lg="3">
+    <b-col cols="12" sm="6" md="4">
         <b-card
-            :header="oferta.titol"
+            :title="oferta.titol"
+            :sub-title="oferta.empresa_id.nom"
             v-b-modal.modal-oferta
             @click="pasarInfoOferta"
             :border-variant="color15"
@@ -14,12 +15,17 @@
                     {{ oferta.descripcio }}
                 </p>
             </b-card-text>
+            <div class="clearfix">
+                <div class="float-left">
+                    <small class="">{{ oferta.ubicacio }}</small>
+                </div>
+                <div class="float-right">
+                    <small class="">{{ oferta.data_publicacio }}</small>
+                </div>
+            </div>
+            <!-- <template #footer> -->
 
-            <template #footer>
-                <small class="text-muted"
-                    >Data publicació: {{ oferta.data_publicacio }}</small
-                >
-            </template>
+            <!-- </template> -->
         </b-card>
     </b-col>
 </template>
@@ -78,4 +84,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+</style>
