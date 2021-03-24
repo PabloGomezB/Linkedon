@@ -1,40 +1,35 @@
 <template>
-    <div>
+    <div v-if="hasUser">
         <h1>Ofertas por categorias</h1>
-
         <SelectCategoria @getOfertasEvent="getOfertas()"></SelectCategoria>
-
-        <div v-if="hasUser">
-            <b-card-group deck :key="componentKey">
-                <Oferta
-                    v-for="oferta in resultadoOfertas"
-                    :key="oferta.id"
-                    :oferta="oferta"
-                    :userLogged="userLogged"
-                ></Oferta>
-            </b-card-group>
-        </div>
-
+        <Ofertas
+            :userLogged="userLogged"
+            :resultadoOfertas="resultadoOfertas"
+            :key="componentKey"
+        >
+        </Ofertas>
         <ModalOferta
-            v-if="hasUser"
             :ofertaSeleccionada="ofertaSeleccionada"
             :userLogged="userLogged"
             @getOfertasEvent="getOfertas()"
             @forceRerenderEvent="forceRerender()"
         ></ModalOferta>
     </div>
+    <div v-else class="text-center mt-5">
+        <b-spinner label="Loading..."></b-spinner>
+    </div>
 </template>
 
 <script>
 import SelectCategoria from "./SelectCategoria";
 import ModalOferta from "./ModalOferta";
-import Oferta from "./Oferta";
+import Ofertas from "./Ofertas";
 
 export default {
     name: "OfertasByCategorias",
     components: {
         SelectCategoria,
-        Oferta,
+        Ofertas,
         ModalOferta,
     },
     data() {
@@ -50,7 +45,7 @@ export default {
         getOfertas() {
             this.axios
                 .get(
-                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?filter=data_publicacio,gt," +
+                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?filter=estat,eq,1&join=empresa_id,empresa&join=categoria_id,categoria&order=data_publicacio,asc&filter=data_publicacio,gt," +
                         this.getDate3MonthsSubstracted()
                 )
                 .then((response) => {

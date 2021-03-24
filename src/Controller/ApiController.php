@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+
 
 #[Route('/api')]
 class ApiController extends AbstractController {
@@ -52,5 +55,21 @@ class ApiController extends AbstractController {
 
         $em->flush();
         return new JsonResponse(['status' => 'Row creada!'], Response::HTTP_CREATED);
+    }
+
+    #[Route('/sendEmail')]
+    public function sendEmail(MailerInterface $mailer): JsonResponse {
+
+        $email = (new Email())
+            ->from('hello@example.com')
+            ->to('a18anggarvic@inspedralbes.cat')
+
+            ->subject('Time for Symfony Mailer!')
+            ->text('Sending emails is fun again!')
+            ->html('<p>See Twig integration for better HTML integration!</p>');
+
+        $mailer->send($email);
+
+        return new JsonResponse(['status' => 'Email Enviado!'], Response::HTTP_OK);
     }
 }

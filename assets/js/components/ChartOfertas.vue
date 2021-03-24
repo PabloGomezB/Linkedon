@@ -10,10 +10,10 @@ import Chart from "./Chart.vue";
 export default {
     name: "ChartOfertas",
     components: { Chart },
-    data: () => ({
-        // loaded: false,
-        // chartdata: null,
-    }),
+    // data: () => ({
+    // loaded: false,
+    // chartdata: null,
+    // }),
     // mounted() {
     //     this.axios
     //         .get(

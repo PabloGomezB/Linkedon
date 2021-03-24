@@ -1,24 +1,33 @@
 <template>
-    <b-card
-        :header="oferta.titol"
-        v-b-modal.modal-oferta
-        @click="pasarInfoOferta"
-        :border-variant="color15"
-        :bg-variant="colorJoinBody"
-        :text-variant="colorJoinText"
-    >
-        <b-card-text>
-            <p>
-                {{ oferta.descripcio }}
-            </p>
-        </b-card-text>
+    <b-col cols="12" sm="6" md="4">
+        <b-card
+            :title="oferta.titol"
+            :sub-title="oferta.empresa_id.nom"
+            v-b-modal.modal-oferta
+            @click="pasarInfoOferta"
+            :border-variant="color15"
+            :bg-variant="colorJoinBody"
+            :text-variant="colorJoinText"
+            class="mb-3"
+        >
+            <b-card-text>
+                <p>
+                    {{ oferta.descripcio }}
+                </p>
+            </b-card-text>
+            <div class="clearfix">
+                <div class="float-left">
+                    <small class="">{{ oferta.ubicacio }}</small>
+                </div>
+                <div class="float-right">
+                    <small class="">{{ oferta.data_publicacio }}</small>
+                </div>
+            </div>
+            <!-- <template #footer> -->
 
-        <template #footer>
-            <small class="text-muted"
-                >Data publicació: {{ oferta.data_publicacio }}</small
-            >
-        </template>
-    </b-card>
+            <!-- </template> -->
+        </b-card>
+    </b-col>
 </template>
 
 <script>
@@ -34,7 +43,7 @@ export default {
     },
     methods: {
         pasarInfoOferta() {
-            this.$parent.ofertaSeleccionada = this.oferta;
+            this.$parent.$parent.ofertaSeleccionada = this.oferta;
         },
         getDate15daysSubstracted() {
             let date = new Date();
@@ -75,4 +84,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+</style>
