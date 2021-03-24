@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class LinkedonController extends AbstractController {
 
     /**
-     * @Route ("/", name="linkedon_index", host="http://labs.iam.cat/~a18pabgombra/Linkedon")
+     * @Route ("/", name="linkedon_index")
      */
     // #[Route('/', name: 'linkedon_index')]
     public function index(): Response {
@@ -25,7 +25,7 @@ class LinkedonController extends AbstractController {
 
     // Control para mandar a las empresas RECIEN REGISTRADAS a completar el registro como empresas (al completar el registro ROLE_UNVERIFIED se eliminará)
     /**
-     * @Route ("/defineRol", name="linkedon_defineRol", host="http://labs.iam.cat/~a18pabgombra/Linkedon")
+     * @Route ("/defineRol", name="linkedon_defineRol")
      */
     // #[Route('/defineRol', name: 'linkedon_defineRol')]
     public function defineRol(): Response {
@@ -52,7 +52,7 @@ class LinkedonController extends AbstractController {
     }
 
     /**
-     * @Route ("/UserLoggedView", name="linkedon_userloggedview", host="http://labs.iam.cat/~a18pabgombra/Linkedon")
+     * @Route ("/UserLoggedView", name="linkedon_userloggedview")
      */
     // #[Route('/UserLoggedView', name: 'linkedon_userloggedview')]
     public function userLoggedView(): Response {
