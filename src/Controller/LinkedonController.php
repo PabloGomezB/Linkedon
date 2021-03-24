@@ -39,6 +39,9 @@ class LinkedonController extends AbstractController {
         else if(in_array("ROLE_EMPRESA", $this->getUser()->getRoles())){
             return $this->redirectToRoute('oferta_new');
         }
+        // else if(in_array("ROLE_ADMIN", $this->getUser()->getRoles())){
+        //     return $this->redirectToRoute('admin');
+        // }
         else{
             return $this->redirectToRoute('linkedon_userloggedview');
         }
@@ -57,6 +60,7 @@ class LinkedonController extends AbstractController {
         ]);
     }
 
+    // Este metodo se llama desde EventListener/ExceptionListener.php cuando ocurre la excepcion 403
     #[Route('/error/403', name: 'error403')]
     public function error403(): Response {
 

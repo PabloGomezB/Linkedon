@@ -10,6 +10,12 @@
 
 				{% if is_granted("ROLE_ADMIN") %}
 				<li class="nav-item mr-5">
+					<a href="/admin/" class="nav-link" style="color:white;">Admin</a>
+				</li>
+				<li class="nav-item mr-5">
+					<a href="/UserLoggedView" class="nav-link" style="color:white;">User</a>
+				</li>
+				<li class="nav-item mr-5">
 					<a href="/oferta/new" class="nav-link" style="color:white;">Empresa</a>
 				</li>
 				{% endif %}

@@ -26,6 +26,19 @@ import Routes from "./routes.js";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
+// Bootstrap js
+import "bootstrap/dist/js/bootstrap.bundle.js";
+
+// //jQuery
+// import "jquery/dist/jquery.js";
+
+// // require jQuery normally
+// const $ = require('jquery');
+// // create global $ and jQuery variables
+// global.$ = global.jQuery = $;
+
+
+
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);
 // Optionally install the BootstrapVue icon components plugin

@@ -1,43 +1,156 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Oferta index{% endblock %}
+{% block title %}Admin{% endblock %}
 
 {% block body %}
-    <h1>Oferta index</h1>
+<div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#contentTab1">Ofertas Nuevas</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#contentTab2">Ofertas con inscripciones</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#contentTab3">Todas</a>
+        </li>
+    </ul>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titol</th>
-                <th>Descripcio</th>
-                <th>DataPublicacio</th>
-                <th>Ubicacio</th>
-                <th>Estat</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for ofertum in ofertas %}
-            <tr>
-                <td>{{ ofertum.id }}</td>
-                <td>{{ ofertum.titol }}</td>
-                <td>{{ ofertum.descripcio }}</td>
-                <td>{{ ofertum.dataPublicacio ? ofertum.dataPublicacio|date('Y-m-d') : '' }}</td>
-                <td>{{ ofertum.ubicacio }}</td>
-                <td>{{ ofertum.estat }}</td>
-                <td>
-                    <a href="{{ path('oferta_show', {'id': ofertum.id}) }}">show</a>
-                    <a href="{{ path('oferta_edit', {'id': ofertum.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('oferta_new') }}">Create new</a>
+    {# CONTENIDOS #}
+    <div class="tab-content" id="myTabContent">
+        {# TAB 1 #}
+        <div class="tab-pane fade show active" id="contentTab1" role="tabpanel">
+            <div class="container p-5">
+                {% if ofertasEstat0 is empty %}
+                <h5>No hay ofertas nuevas para revisar</h5>
+                {% else %}
+                <table class="table">
+                    <thead>
+                        <h3>Ofertas nuevas</h3>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titol</th>
+                            <th>Descripcio</th>
+                            <th>DataPublicacio</th>
+                            <th>Ubicacio</th>
+                            {# <th>Publicada</th> #}
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ofertaE0 in ofertasEstat0 %}
+                        <tr>
+                            <td>{{ ofertaE0.id }}</td>
+                            <td>{{ ofertaE0.titol }}</td>
+                            <td>{{ ofertaE0.descripcio }}</td>
+                            <td>{{ ofertaE0.dataPublicacio ? ofertaE0.dataPublicacio|date('Y-m-d') : '' }}</td>
+                            <td>{{ ofertaE0.ubicacio }}</td>
+                            {# {% if ofertum.estat == 1 %}
+                            <td>Sí</td>
+                            {% else %}
+                            <td>No</td>
+                            {% endif %} #}
+                            <td>
+                                <a class="btn btn-success"
+                                    href="{{ path('oferta_show', {'id': ofertaE0.id}) }}">Publicar</a>
+                                <a class="btn btn-danger"
+                                    href="{{ path('oferta_edit', {'id': ofertaE0.id}) }}">Rechazar</a>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="7">no records found</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+            </div>
+        </div>
+        {# TAB 2 #}
+        <div class="tab-pane fade" id="contentTab2" role="tabpanel">
+            <div class="container p-5">
+                {% if ofertasJoin is empty %}
+                <h5>No hay ofertas con candidatos</h5>
+                {% else %}
+                <table class="table">
+                    <thead>
+                        <h3>Ofertas con inscripciones</h3>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titol</th>
+                            <th>Descripcio</th>
+                            <th>DataPublicacio</th>
+                            <th>Ubicacio</th>
+                            <th>Inscritos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ofertaJ in ofertasJoin %}
+                        <tr>
+                            <td>{{ ofertaJ[0].id }}</td>
+                            <td>{{ ofertaJ[0].titol }}</td>
+                            <td>{{ ofertaJ[0].descripcio }}</td>
+                            <td>{{ ofertaJ[0].dataPublicacio ? ofertaJ[0].dataPublicacio|date('Y-m-d') : '' }}</td>
+                            <td>{{ ofertaJ[0].ubicacio }}</td>
+                            <td>{{ ofertaJ[1] }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="7">no records found</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+            </div>
+        </div>
+        {# TAB 3 #}
+        <div class="tab-pane fade" id="contentTab3" role="tabpanel">
+            <div class="container p-5">
+                {% if ofertas is empty %}
+                <h5>No hay ofertas</h5>
+                {% else %}
+                <table class="table">
+                    <thead>
+                        <h3>Ofertas nuevas</h3>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titol</th>
+                            <th>Descripcio</th>
+                            <th>DataPublicacio</th>
+                            <th>Ubicacio</th>
+                            <th>Estat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ofertum in ofertas %}
+                        <tr>
+                            <td>{{ ofertum.id }}</td>
+                            <td>{{ ofertum.titol }}</td>
+                            <td>{{ ofertum.descripcio }}</td>
+                            <td>{{ ofertum.dataPublicacio ? ofertum.dataPublicacio|date('Y-m-d') : '' }}</td>
+                            <td>{{ ofertum.ubicacio }}</td>
+                            <td>{{ ofertum.estat }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="7">no records found</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="//code.jquery.com/jquery-3.1.0.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script>
+    $('#myTab a').on('click', function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+</script>
 {% endblock %}

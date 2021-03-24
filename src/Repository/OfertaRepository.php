@@ -19,6 +19,31 @@ class OfertaRepository extends ServiceEntityRepository
         parent::__construct($registry, Oferta::class);
     }
 
+    /**
+    * @return Oferta[] Returns an array of Oferta objects
+    */
+    public function findAllJoin()
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p, c, COUNT(p)
+            FROM App\Entity\Oferta p
+            INNER JOIN p.candidats c
+            GROUP BY p'
+        );
+
+        return $query->getResult();
+        /* El return del select es un array de arrays:
+        foreach($query->getResult() as $arrayOfertas){
+            foreach($arrayOfertas as $datos){
+                echo $datos[0] = datos de la oferta;
+                echo $datos[1] = numero de candidatos que tiene esta oferta
+            }
+        }
+        */
+    }
+
     // /**
     //  * @return Oferta[] Returns an array of Oferta objects
     //  */
