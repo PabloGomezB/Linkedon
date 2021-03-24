@@ -1,62 +1,248 @@
 {% block body %}
 <style>
-html {
-  height: 100%;
-  overflow: hidden;
-}
-body{
-  background-color: #f4f3f5;
-  min-height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%236ba184' fill-opacity='0.21'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-svg{
-  transform: scale(0.3,0.3);
-  margin-top:-45%;
-}
-.st0{display:none;}
-.st1{display:inline;fill:#E2E4FA;}
-.st2{display:none;opacity:0.5;}
-.st3{display:inline;fill-rule:evenodd;clip-rule:evenodd;fill:#A8AABA;}
-.st4{display:inline;}
-.st5{fill:#A8AABA;}
-.st6{opacity:0.1;}
-.st7{fill:#2D1C2D;}
-.st8{fill-rule:evenodd;clip-rule:evenodd;fill:#2D1C2D;}
-.st9{fill:#FFFFFF;}
-.st10{fill:#BF3E73;}
-.st11{fill:#8F3157;}
+    html {
+        height: 100%;
+        overflow: hidden;
+    }
 
-@keyframes TongueAnim {
-  0% {transform:skewY(0deg);}
-  50% {transform:skewY(10deg);}
-  100% {transform: skewY(-10deg);}
-}
-.tongue {
-  animation: TongueAnim .2s ease infinite;
-  transform-origin: top right;
-  transform-box: fill-box;
-}
-.st12{fill-rule:evenodd;clip-rule:evenodd;fill:#7EBE9B;}
-.st13{opacity:0.3;fill-rule:evenodd;clip-rule:evenodd;fill:#5F8D75;}
-.st14{opacity:0.6;}
-.st15{fill:#5F8D75;}
-.st16{opacity:0.6;fill:none;stroke:#7EBE9B;stroke-miterlimit:10;}
-.st17{fill:#E7B84D;}
-.st18{fill:none;stroke:#FFFFFF;stroke-width:1.098;stroke-miterlimit:10;}
-.st19{fill:none;}
-.st20{font-family:'Asap-Medium';}
-.st21{font-size:28.6973px;}
-.st22{display:inline;fill:none;}
-.st23{fill:#7091A4;}
-.st24{font-family:'BloggerSans';}
-.st25{font-size:9.72px;}
-.st26{font-family:'Asap-Regular';}
-.st27{font-size:16.524px;}
-.st28{display:inline;fill:#7EBE9B;}
-.st29{font-family:'Asap-Bold';}
-.st30{font-size:10.692px;}
-.st31{fill:#9799A2;}
+    body {
+        background-color: #f4f3f5;
+        min-height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%236ba184' fill-opacity='0.21'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    svg {
+        transform: scale(0.3, 0.3);
+        margin-top: -45%;
+    }
+
+    .st0 {
+        display: none;
+    }
+
+    .st1 {
+        display: inline;
+        fill: #E2E4FA;
+    }
+
+    .st2 {
+        display: none;
+        opacity: 0.5;
+    }
+
+    .st3 {
+        display: inline;
+        fill-rule: evenodd;
+        clip-rule: evenodd;
+        fill: #A8AABA;
+    }
+
+    .st4 {
+        display: inline;
+    }
+
+    .st5 {
+        fill: #A8AABA;
+    }
+
+    .st6 {
+        opacity: 0.1;
+    }
+
+    .st7 {
+        fill: #2D1C2D;
+    }
+
+    .st8 {
+        fill-rule: evenodd;
+        clip-rule: evenodd;
+        fill: #2D1C2D;
+    }
+
+    .st9 {
+        fill: #FFFFFF;
+    }
+
+    .st10 {
+        fill: #BF3E73;
+    }
+
+    .st11 {
+        fill: #8F3157;
+    }
+
+    @keyframes TongueAnim {
+        0% {
+            transform: skewY(0deg);
+        }
+
+        50% {
+            transform: skewY(10deg);
+        }
+
+        100% {
+            transform: skewY(-10deg);
+        }
+    }
+
+    .tongue {
+        animation: TongueAnim .2s ease infinite;
+        transform-origin: top right;
+        transform-box: fill-box;
+    }
+
+    .st12 {
+        fill-rule: evenodd;
+        clip-rule: evenodd;
+        fill: #7EBE9B;
+    }
+
+    .st13 {
+        opacity: 0.3;
+        fill-rule: evenodd;
+        clip-rule: evenodd;
+        fill: #5F8D75;
+    }
+
+    .st14 {
+        opacity: 0.6;
+    }
+
+    .st15 {
+        fill: #5F8D75;
+    }
+
+    .st16 {
+        opacity: 0.6;
+        fill: none;
+        stroke: #7EBE9B;
+        stroke-miterlimit: 10;
+    }
+
+    .st17 {
+        fill: #E7B84D;
+    }
+
+    .st18 {
+        fill: none;
+        stroke: #FFFFFF;
+        stroke-width: 1.098;
+        stroke-miterlimit: 10;
+    }
+
+    .st19 {
+        fill: none;
+    }
+
+    .st20 {
+        font-family: 'Asap-Medium';
+    }
+
+    .st21 {
+        font-size: 28.6973px;
+    }
+
+    .st22 {
+        display: inline;
+        fill: none;
+    }
+
+    .st23 {
+        fill: #7091A4;
+    }
+
+    .st24 {
+        font-family: 'BloggerSans';
+    }
+
+    .st25 {
+        font-size: 9.72px;
+    }
+
+    .st26 {
+        font-family: 'Asap-Regular';
+    }
+
+    .st27 {
+        font-size: 16.524px;
+    }
+
+    .st28 {
+        display: inline;
+        fill: #7EBE9B;
+    }
+
+    .st29 {
+        font-family: 'Asap-Bold';
+    }
+
+    .st30 {
+        font-size: 10.692px;
+    }
+
+    .st31 {
+        fill: #9799A2;
+    }
+
+    button {
+        position: absolute;
+        display: inline-block;
+        cursor: pointer;
+        outline: none;
+        border: 0;
+        vertical-align: middle;
+        text-decoration: none;
+        font-size: 1rem;
+        color: rgb(106, 163, 137);
+        font-weight: 700;
+        text-transform: uppercase;
+        font-family: inherit;
+    }
+
+    button.big-button {
+        padding: 1em 2em;
+        border: 2px solid rgb(106, 163, 137);
+        border-radius: 1em;
+        background: rgb(205, 255, 232);
+        transform-style: preserve-3d;
+        transition: all 175ms cubic-bezier(0, 0, 1, 1);
+    }
+
+    button.big-button::before {
+        position: absolute;
+        content: '';
+        width: 99%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgb(150, 232, 195);
+        border-radius: inherit;
+        border: inherit;
+        transform: translate3d(0, 0.75em, -1em);
+        transition: all 175ms cubic-bezier(0, 0, 1, 1);
+    }
+
+
+    button.big-button:hover {
+        background: rgb(187, 232, 211);
+        transform: translate(0, 0.375em);
+    }
+
+    button.big-button:hover::before {
+        transform: translate3d(0, 0.75em, -1em);
+    }
+
+    button.big-button:active {
+        transform: translate(0em, 0.75em);
+    }
+
+    button.big-button:active::before {
+        transform: translate3d(0, 0, -1em);
+    }
 </style>
+<button class="big-button" onclick="window.location='/';">Home</button>
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Frijole|Josefin+Sans:300,400,400i,600,700|Viga"
     rel="stylesheet">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

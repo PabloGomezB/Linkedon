@@ -54,6 +54,7 @@ security:
         - { path: ^/logout, role: [IS_AUTHENTICATED_FULLY] } # Todos los logeados pueden entrar a /logout
         - { path: ^/login, role: [IS_AUTHENTICATED_ANONYMOUSLY] } # SOLO los que no están logeados entran a /login
         - { path: ^/register, role: [IS_AUTHENTICATED_ANONYMOUSLY] } # SOLO los que no están logeados entran a /register
-        ## Nivel mas restrictivo
+        ## Nivel menos concreto
+        - { path: ^/error/403, roles: [IS_AUTHENTICATED_ANONYMOUSLY, IS_AUTHENTICATED_FULLY] } # A la pagina de error puede entrar todo el mundo
         - { path: ^/(.+), roles: ROLE_ADMIN } # Todas las rutas son solo accesibles para admin
         - { path: ^/, role: [IS_AUTHENTICATED_ANONYMOUSLY] } # Abrimos el index para cualquier user
