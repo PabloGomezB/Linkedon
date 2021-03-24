@@ -4,6 +4,8 @@
             id="modal-oferta"
             :title="ofertaSeleccionada.titol"
             hide-footer
+            ref="modal-oferta"
+            @hide="resetModal()"
         >
             <b-container fluid>
                 <p>{{ ofertaSeleccionada.empresa_id.nom }}</p>
@@ -91,6 +93,7 @@ export default {
                                         oferta_id: this.ofertaSeleccionada.id,
                                         candidat_id:
                                             response1.data.records[0].id,
+                                        carta: this.textCarta,
                                     },
                                 }).then((response2) => {
                                     console.log(
