@@ -23,7 +23,15 @@ import App from "./views/App.vue";
 import Routes from "./routes.js";
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
-import "bootstrap/dist/css/bootstrap.css";
+
+// import "bootstrap/dist/css/bootstrap.css";
+
+// import "bootswatch/dist/superhero/bootstrap.min.css";
+// import "bootswatch/dist/minty/bootstrap.min.css";
+import "bootswatch/dist/materia/bootstrap.min.css";
+// import "bootswatch/dist/litera/bootstrap.min.css";
+// import "bootswatch/dist/pulse/bootstrap.min.css";
+
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
 // Make BootstrapVue available throughout your project
