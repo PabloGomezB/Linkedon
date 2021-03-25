@@ -7,7 +7,6 @@
 
 # ADMIN
 - Terminar la parte de enviar correo (falta enviar el CV una vez esté subido y la carta de presentacion) - Jordi
-- Editar las ofertas en admin (tab "Todas") - Pablo
 
 # DISEÑO
 - Maquetar segun diseño de angel - Todos¿?

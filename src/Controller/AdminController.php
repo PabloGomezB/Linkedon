@@ -19,10 +19,6 @@ class AdminController extends AbstractController
         //     'controller_name' => 'AdminController',
         // ]);
 
-        // $uri = $request->getPathInfo();
-        // echo str_replace("%23","#",$uri);
-
-
         return $this->render('oferta/index.html.twig', [
             'ofertas' => $ofertaRepository->findAll(),
             'ofertasEstat0' => $ofertaRepository->findBy(array('estat' => '0')),
@@ -49,31 +45,13 @@ class AdminController extends AbstractController
     #[Route('/delete/{id}', name: 'admin_delete')]
     public function deleteOferta($id): Response
     {
-        // $oferta = new Oferta();
-        // $entityManager = $this->getDoctrine()->getManager();
-        // $oferta = $entityManager->getRepository(Oferta::class)->findOneBy(array('id' => $id));
-        // $entityManager->remove($oferta);
-        // $entityManager->flush();
+        $oferta = new Oferta();
+        $entityManager = $this->getDoctrine()->getManager();
+        $oferta = $entityManager->getRepository(Oferta::class)->findOneBy(array('id' => $id));
+        $entityManager->remove($oferta);
+        $entityManager->flush();
 
         return $this->redirectToRoute('admin/contentTab3');
     }
 
-
-    // #[Route('/{id}/edit', name: 'oferta_edit', methods: ['GET', 'POST'])]
-    // public function edit(Request $request, Oferta $ofertum): Response
-    // {
-    //     $form = $this->createForm(OfertaType::class, $ofertum);
-    //     $form->handleRequest($request);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $this->getDoctrine()->getManager()->flush();
-
-    //         return $this->redirectToRoute('oferta_index');
-    //     }
-
-    //     return $this->render('oferta/edit.html.twig', [
-    //         'ofertum' => $ofertum,
-    //         'form' => $form->createView(),
-    //     ]);
-    // }
 }
