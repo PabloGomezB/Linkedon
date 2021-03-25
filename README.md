@@ -1,6 +1,5 @@
 # CANDIDAT
 - Crear (registrar) candidat cuando se registra un nuevo usuario - Angel
-- Añadir campo CV en tabla candidat para poder subirlo - Pablo
 - Poder subir CV cuando el usuario se registra como candidat - Angel
 
 # CHART

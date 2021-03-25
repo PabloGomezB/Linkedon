@@ -49,6 +49,11 @@ class Candidat {
      */
     private $ofertes;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $cv;
+
     public function __construct() {
         $this->ofertes = new ArrayCollection();
     }
@@ -132,6 +137,18 @@ class Candidat {
         if ($this->ofertes->removeElement($oferte)) {
             $oferte->removeCandidat($this);
         }
+
+        return $this;
+    }
+
+    public function getCv(): ?string
+    {
+        return $this->cv;
+    }
+
+    public function setCv(?string $cv): self
+    {
+        $this->cv = $cv;
 
         return $this;
     }

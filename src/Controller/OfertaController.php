@@ -67,7 +67,7 @@ class OfertaController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('oferta_index');
+            return $this->redirectToRoute('admin/contentTab3');
         }
 
         return $this->render('oferta/edit.html.twig', [

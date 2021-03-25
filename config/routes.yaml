@@ -4,3 +4,6 @@
 app_logout:
     path: /logout
     methods: GET
+admin/contentTab3:
+    path: 'admin/#contentTab3'
+    controller: App\Controller\AdminController::index

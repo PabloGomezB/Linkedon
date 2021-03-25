@@ -12,7 +12,7 @@
             <a class="nav-link" data-toggle="tab" href="#contentTab2">Ofertas con inscripciones</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#contentTab3">Todas</a>
+            <a class="nav-link" data-toggle="tab" href="#contentTab3">Editar/Eliminar ofertas</a>
         </li>
     </ul>
 
@@ -33,7 +33,6 @@
                             <th>Descripcio</th>
                             <th>DataPublicacio</th>
                             <th>Ubicacio</th>
-                            {# <th>Publicada</th> #}
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -45,11 +44,6 @@
                             <td>{{ ofertaE0.descripcio }}</td>
                             <td>{{ ofertaE0.dataPublicacio ? ofertaE0.dataPublicacio|date('Y-m-d') : '' }}</td>
                             <td>{{ ofertaE0.ubicacio }}</td>
-                            {# {% if ofertum.estat == 1 %}
-                            <td>Sí</td>
-                            {% else %}
-                            <td>No</td>
-                            {% endif %} #}
                             <td>
                                 <a class="btn btn-success"
                                     href="{{ path('admin_admitir', {'id': ofertaE0.id, 'publicar' : 1}) }}">Publicar</a>
@@ -113,25 +107,42 @@
                 {% else %}
                 <table class="table">
                     <thead>
-                        <h3>Ofertas nuevas</h3>
+                        <h3>Todas las ofertas</h3>
                         <tr>
                             <th>Id</th>
+                            <th>Empresa</th>
                             <th>Titol</th>
                             <th>Descripcio</th>
                             <th>DataPublicacio</th>
                             <th>Ubicacio</th>
                             <th>Estat</th>
+                            <th>Categoria</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for ofertum in ofertas %}
                         <tr>
                             <td>{{ ofertum.id }}</td>
+                            <td>{{ ofertum.empresa }}</td>
                             <td>{{ ofertum.titol }}</td>
                             <td>{{ ofertum.descripcio }}</td>
                             <td>{{ ofertum.dataPublicacio ? ofertum.dataPublicacio|date('Y-m-d') : '' }}</td>
                             <td>{{ ofertum.ubicacio }}</td>
-                            <td>{{ ofertum.estat }}</td>
+                            {% if ofertum.estat == 1 %}
+                            <td style="color:green">Publicada</td>
+                            {% elseif ofertum.estat == 2 %}
+                            <td style="color:red">Rechazada</td>
+                            {% else %}
+                            <td style="color:grey">Borrador</td>
+                            {% endif %}
+                            <td>{{ ofertum.categoria }}</td>
+                            <td>
+                                <a class="btn btn-warning"
+                                    href="{{ path('oferta_edit', {'id': ofertum.id}) }}">Editar</a>
+                                <a class="btn btn-danger"
+                                    href="{{ path('admin_delete', {'id': ofertum.id}) }}">Eliminar</a>
+                            </td>
                         </tr>
                         {% else %}
                         <tr>
@@ -152,5 +163,25 @@
         e.preventDefault()
         $(this).tab('show')
     })
+    // store the currently selected tab in the hash value
+    $("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
+    var id = $(e.target).attr("href").substr(1);
+        window.location.hash = id;
+    });
+    // on load of the page: switch to the currently selected tab
+    var hash = window.location.hash;
+    let tab = window.location.pathname.split('/')[2].replace("%23","#");
+    if(!hash){
+        $('#myTab a[href="' + tab + '"]').tab('show');
+    }
+    else{
+        if (tab == hash){
+            $('#myTab a[href="' + tab + '"]').tab('show');
+        }
+        else{
+            $('#myTab a[href="' + hash + '"]').tab('show');
+        }
+    }
+
 </script>
 {% endblock %}
