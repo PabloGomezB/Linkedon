@@ -39,9 +39,6 @@ class LinkedonController extends AbstractController {
         else if(in_array("ROLE_EMPRESA", $this->getUser()->getRoles())){
             return $this->redirectToRoute('oferta_new');
         }
-        // else if(in_array("ROLE_ADMIN", $this->getUser()->getRoles())){
-        //     return $this->redirectToRoute('admin');
-        // }
         else{
             return $this->redirectToRoute('linkedon_userloggedview');
         }

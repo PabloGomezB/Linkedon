@@ -52,9 +52,9 @@
                             {% endif %} #}
                             <td>
                                 <a class="btn btn-success"
-                                    href="{{ path('oferta_show', {'id': ofertaE0.id}) }}">Publicar</a>
+                                    href="{{ path('admin_admitir', {'id': ofertaE0.id, 'publicar' : 1}) }}">Publicar</a>
                                 <a class="btn btn-danger"
-                                    href="{{ path('oferta_edit', {'id': ofertaE0.id}) }}">Rechazar</a>
+                                    href="{{ path('admin_admitir', {'id': ofertaE0.id, 'publicar' : 0}) }}">Rechazar</a>
                             </td>
                         </tr>
                         {% else %}
