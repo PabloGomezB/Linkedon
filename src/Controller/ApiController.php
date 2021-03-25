@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Candidat;
+use App\Entity\Empresa;
 use App\Entity\Oferta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -31,7 +32,8 @@ class ApiController extends AbstractController {
     }
 
     #[Route('/setOfertaCandidat', name: 'setOfertaCandidat', methods: ['POST'])]
-    public function setOfertaCandidat(Request $request): JsonResponse {
+    public function setOfertaCandidat(Request $request)//: JsonResponse
+    {
 
         $data = json_decode($request->getContent(), true);
 
@@ -54,22 +56,31 @@ class ApiController extends AbstractController {
         $em->persist($oferta);
 
         $em->flush();
-        return new JsonResponse(['status' => 'Row creada!'], Response::HTTP_CREATED);
+
+        // Obtener el correo de la empresa que ha publicado la oferta
+        $empresa = $oferta->getEmpresa();
+        $empresa_email = $empresa->getCorreu();
+
+        // Obtener el cv del candidato con id->candidat_id
+        // .....
+        
+        // Redirect a sendEmail() pasandole como parametros los datos necesarios
+        return $this->redirectToRoute('sendEmail', array('candidat_id' => $candidat_id, 'empresa_email' => $empresa_email));
+
+        // return new JsonResponse(['status' => 'Row creada!'], Response::HTTP_CREATED);
     }
 
-    #[Route('/sendEmail')]
-    public function sendEmail(MailerInterface $mailer): JsonResponse {
+    #[Route('/email/{candidat_id}-{empresa_email}', name: 'sendEmail',)]
+    public function sendEmail(MailerInterface $mailer, $candidat_id = 0, $empresa_email = ""): JsonResponse {
 
-        $email = (new Email())
-            ->from('hello@example.com')
-            ->to('a18anggarvic@inspedralbes.cat')
+        // $email = (new Email())
+        //     ->from('linkedon.inspedralbes@gmail.com')
+        //     ->to('a18pabgombra@inspedralbes.cat') // Substituir por $empresa_email
+        //     ->subject('Nuevo candidato en tu oferta')
+        //     ->text('wtf es esto?')
+        //     ->html('<p>Usuario inscrito en tu oferta</p>'); // Datos del usuario (CV)
+        // $mailer->send($email);
 
-            ->subject('Time for Symfony Mailer!')
-            ->text('Sending emails is fun again!')
-            ->html('<p>See Twig integration for better HTML integration!</p>');
-
-        $mailer->send($email);
-
-        return new JsonResponse(['status' => 'Email Enviado!'], Response::HTTP_OK);
+        return new JsonResponse(['status' => 'Email Enviado!', 'candidat_id' => $candidat_id, 'empresa_email' => $empresa_email], Response::HTTP_OK);
     }
 }
