@@ -35,7 +35,19 @@ export default {
     data() {
         return {
             resultadoOfertas: {},
-            ofertaSeleccionada: {},
+            ofertaSeleccionada: {
+                titol: "",
+                empresa_id: {
+                    nom: "",
+                    tipus: "",
+                },
+                data_publicacio: "",
+                ubicacio: "",
+                descripcio: "",
+                categoria_id: {
+                    descripcio: "",
+                },
+            },
             userLogged: {},
             hasUser: false,
             componentKey: 0,

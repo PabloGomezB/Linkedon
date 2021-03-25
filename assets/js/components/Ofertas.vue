@@ -1,6 +1,6 @@
 <template>
     <div class="mt-3">
-        <b-row :key="componentKey" align-v="stretch">
+        <b-row align-v="stretch">
             <Oferta
                 v-for="oferta in resultadoOfertas"
                 :key="oferta.id"
@@ -22,7 +22,6 @@ export default {
     props: {
         resultadoOfertas: Array,
         userLogged: Object,
-        componentKey: Number,
     },
 };
 </script>

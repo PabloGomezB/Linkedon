@@ -3,6 +3,10 @@
         <b-card
             :title="oferta.titol"
             :sub-title="oferta.empresa_id.nom"
+            :img-src="
+                require('../../img/uploads/logos_empresa/' +
+                    oferta.empresa_id.logo)
+            "
             v-b-modal.modal-oferta
             @click="pasarInfoOferta"
             :border-variant="color15"
@@ -84,7 +88,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 p {
     overflow: hidden;
     text-overflow: ellipsis;

@@ -4,8 +4,11 @@
             id="modal-oferta"
             :title="ofertaSeleccionada.titol"
             hide-footer
+            ref="modal-oferta"
+            @hide="resetModal()"
         >
             <b-container fluid>
+                <p>{{ ofertaSeleccionada.empresa_id.nom }}</p>
                 <p>{{ ofertaSeleccionada.empresa_id.tipus }}</p>
                 <p>{{ ofertaSeleccionada.data_publicacio }}</p>
                 <p>{{ ofertaSeleccionada.ubicacio }}</p>
@@ -21,7 +24,7 @@
                 <div v-if="status == 'accepted'">
                     <b-form-textarea
                         id="textarea"
-                        v-model="text"
+                        v-model="textCarta"
                         placeholder="Escribe algo..."
                         rows="3"
                         max-rows="6"
@@ -50,6 +53,7 @@ export default {
     data() {
         return {
             status: "not_accepted",
+            textCarta: "",
         };
     },
     methods: {
@@ -87,7 +91,9 @@ export default {
                                     headers: {},
                                     data: {
                                         oferta_id: this.ofertaSeleccionada.id,
-                                        candidat_id: response1.data.records[0].id,
+                                        candidat_id:
+                                            response1.data.records[0].id,
+                                        carta: this.textCarta,
                                     },
                                 }).then((response2) => {
                                     console.log(
@@ -96,6 +102,7 @@ export default {
                                     );
                                     this.$bvModal.hide("modal-oferta");
                                     this.$emit("forceRerenderEvent");
+                                    this.resetModal();
                                 });
                             });
                     }
@@ -103,6 +110,10 @@ export default {
                 .catch((err) => {
                     console.log("err", err);
                 });
+        },
+        resetModal() {
+            this.status = "not_accepted";
+            this.textCarta = "";
         },
     },
 };
