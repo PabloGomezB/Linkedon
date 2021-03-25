@@ -1,5 +1,7 @@
 <template>
     <b-col cols="12" sm="6" md="4">
+        <!-- Al hacer click (@click)en el card pasamos la info de esa oferta hacia el modal que esta en el padre del padre de este componente -->
+        <!-- Para abrir el modal hemos de poner v-b-modal.{id del modal que quieres que se muestre} como atributo) -->
         <b-card
             :title="oferta.titol"
             :sub-title="oferta.empresa_id.nom"
@@ -47,6 +49,7 @@ export default {
     },
     methods: {
         pasarInfoOferta() {
+            // $parent para pasar info al padre
             this.$parent.$parent.ofertaSeleccionada = this.oferta;
         },
         getDate15daysSubstracted() {
@@ -55,6 +58,7 @@ export default {
             return date;
         },
         setColorIfHasLessThan15Days() {
+            // Para poner la oferta el borde de color rojo para indicar que relatiavamente nuevo (tiene menos de 15 dias).
             if (
                 new Date(this.oferta.data_publicacio) >
                 this.getDate15daysSubstracted()
@@ -63,6 +67,7 @@ export default {
             }
         },
         setColorIfUserJoined() {
+            //Pinta de azul para que sepa que el usuario logged ya se ha inscrito a esa oferta.
             this.axios
                 .get(
                     "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta_candidat?join=candidat_id,candidat"
@@ -89,6 +94,8 @@ export default {
 </script>
 
 <style scoped>
+/* scoped para que solo afecte el estilo en este componente */
+/* Para que no haya un borde cuando clicas una oferta */
 p {
     overflow: hidden;
     text-overflow: ellipsis;

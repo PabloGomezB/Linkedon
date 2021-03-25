@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <!-- Es donde va ir el componente de la ruta -->
         <router-view></router-view>
     </div>
 </template>

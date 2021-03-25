@@ -32,13 +32,15 @@ class ApiController extends AbstractController {
     }
 
     #[Route('/setOfertaCandidat', name: 'setOfertaCandidat', methods: ['POST'])]
-    public function setOfertaCandidat(Request $request)//: JsonResponse
+    public function setOfertaCandidat(Request $request) //: JsonResponse
     {
 
         $data = json_decode($request->getContent(), true);
 
         $oferta_id = $data['oferta_id'];
         $candidat_id = $data['candidat_id'];
+        $carta = $data['carta'];
+
 
         if (empty($oferta_id) || empty($candidat_id)) {
             throw new NotFoundHttpException('Expecting mandatory parameters!');
@@ -63,24 +65,24 @@ class ApiController extends AbstractController {
 
         // Obtener el cv del candidato con id->candidat_id
         // .....
-        
+
         // Redirect a sendEmail() pasandole como parametros los datos necesarios
-        return $this->redirectToRoute('sendEmail', array('candidat_id' => $candidat_id, 'empresa_email' => $empresa_email));
+        return $this->redirectToRoute('sendEmail', array('candidat_id' => $candidat_id, 'empresa_email' => $empresa_email, 'carta' => $carta));
 
         // return new JsonResponse(['status' => 'Row creada!'], Response::HTTP_CREATED);
     }
 
     #[Route('/email/{candidat_id}-{empresa_email}', name: 'sendEmail',)]
-    public function sendEmail(MailerInterface $mailer, $candidat_id = 0, $empresa_email = ""): JsonResponse {
+    public function sendEmail(MailerInterface $mailer, $candidat_id = 0, $empresa_email = "", $carta = ""): JsonResponse {
 
         // $email = (new Email())
         //     ->from('linkedon.inspedralbes@gmail.com')
         //     ->to('a18pabgombra@inspedralbes.cat') // Substituir por $empresa_email
-        //     ->subject('Nuevo candidato en tu oferta')
+        //     ->subject('Nuevo candidato se ha unido a su oferta')
         //     ->text('wtf es esto?')
-        //     ->html('<p>Usuario inscrito en tu oferta</p>'); // Datos del usuario (CV)
+        //     ->html('<p>Usuario inscrito en tu oferta</p><p>$carta</p>'); // Datos del usuario (CV)
         // $mailer->send($email);
 
-        return new JsonResponse(['status' => 'Email Enviado!', 'candidat_id' => $candidat_id, 'empresa_email' => $empresa_email], Response::HTTP_OK);
+        return new JsonResponse(['status' => 'Email Enviado!', 'candidat_id' => $candidat_id, 'empresa_email' => $empresa_email, 'carta' => $carta], Response::HTTP_OK);
     }
 }

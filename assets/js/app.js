@@ -11,51 +11,27 @@ import "../styles/app.css";
 // start the Stimulus application
 import "./bootstrap";
 
-import Vue from "vue";
-
+import Vue from "vue"; //Import de Vue
+import App from "./views/App.vue"; //Import de las vistas vue
+import Routes from "./routes.js"; //Import de las rutas
+import axios from "axios"; //Import de axios
+import VueAxios from "vue-axios"; //Import de vue axios
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
-
-import axios from "axios";
-import VueAxios from "vue-axios";
-
-import App from "./views/App.vue";
-
-import Routes from "./routes.js";
-
 // Import Bootstrap an BootstrapVue CSS files (order is important)
-
-// import "bootstrap/dist/css/bootstrap.css";
-
-// import "bootswatch/dist/superhero/bootstrap.min.css";
-// import "bootswatch/dist/minty/bootstrap.min.css";
-import "bootswatch/dist/materia/bootstrap.min.css";
-// import "bootswatch/dist/litera/bootstrap.min.css";
-// import "bootswatch/dist/pulse/bootstrap.min.css";
-
-import "bootstrap-vue/dist/bootstrap-vue.css";
-
+import "bootswatch/dist/materia/bootstrap.min.css"; //Import de bootstrap theme
+import "bootstrap-vue/dist/bootstrap-vue.css"; //Import de bootstrap vue
 // Bootstrap js
 import "bootstrap/dist/js/bootstrap.bundle.js";
-
-// //jQuery
-// import "jquery/dist/jquery.js";
-
-// // require jQuery normally
-// const $ = require('jquery');
-// // create global $ and jQuery variables
-// global.$ = global.jQuery = $;
-
-
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin);
-
+// Usar axios en vue
 Vue.use(VueAxios, axios);
 
 new Vue({
-    el: "#app",
-    router: Routes,
-    render: (h) => h(App),
+    el: "#app", //Id de donde vas a utilizar los componentes de vue
+    router: Routes, //Implementar rutas
+    render: (h) => h(App), //Renderizar
 });
