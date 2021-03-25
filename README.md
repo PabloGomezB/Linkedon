@@ -1,3 +1,19 @@
+# CANDIDAT
+- Crear (registrar) candidat cuando se registra un nuevo usuario - Angel
+- Añadir campo CV en tabla candidat para poder subirlo - Pablo
+- Poder subir CV cuando el usuario se registra como candidat - Angel
+
+# CHART
+- Chart - Angel
+
+# ADMIN
+- Terminar la parte de enviar correo (falta enviar el CV una vez esté subido y la carta de presentacion) - Jordi
+- Editar las ofertas en admin (tab "Todas") - Pablo
+
+# DISEÑO
+- Maquetar segun diseño de angel - Todos¿?
+
+
 # Linkedón
 
 Linkedón es un proyecto con el objetivo de buscar, listar, guardar, modificar, eliminar ofertas de trabajo de empresas recibidas.
