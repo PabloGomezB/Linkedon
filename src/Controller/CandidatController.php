@@ -35,15 +35,11 @@ class CandidatController extends AbstractController {
 
             $cvFile = $form->get('cv')->getData();
 
-            // this condition is needed because the 'cv' field is not required
-            // so the PDF file must be processed only when a file is uploaded
             if ($cvFile) {
                 $originalFilename = pathinfo($cvFile->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $cvFile->guessExtension();
+                $newFilename = $safeFilename . '_' . uniqid() . '.' . $cvFile->guessExtension();
 
-                // Move the file to the directory where logos are stored
                 try {
                     $cvFile->move(
                         $this->getParameter('cv_directory'),
@@ -52,9 +48,6 @@ class CandidatController extends AbstractController {
                 } catch (FileException $e) {
                     // ... handle exception if something happens during file upload
                 }
-
-                // updates the 'cvFilename' property to store the PDF file name
-                // instead of its contents
                 $candidat->setCv($newFilename);
             }
             $entityManager = $this->getDoctrine()->getManager();
