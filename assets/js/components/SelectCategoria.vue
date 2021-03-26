@@ -51,7 +51,7 @@ export default {
             //Obtenemos las categorias de BD y lo ponemos en las opciones del select con el push ya que es un array
             this.axios
                 .get(
-                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/categoria"
+                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/categoria?order=descripcio,asc"
                 )
                 .then((response) => {
                     console.log("categorias", response.data.records);
