@@ -9,21 +9,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+
 
 #[Route('/candidat')]
-class CandidatController extends AbstractController
-{
+class CandidatController extends AbstractController {
     #[Route('/', name: 'candidat_index', methods: ['GET'])]
-    public function index(CandidatRepository $candidatRepository): Response
-    {
+    public function index(CandidatRepository $candidatRepository): Response {
         return $this->render('candidat/index.html.twig', [
             'candidats' => $candidatRepository->findAll(),
         ]);
     }
 
     #[Route('/new', name: 'candidat_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
-    {
+    public function new(Request $request, SluggerInterface $slugger): Response {
 
         $candidat = new Candidat();
         $userLogged = $this->getUser();
@@ -32,30 +32,56 @@ class CandidatController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($candidat);
-            $entityManager->flush();
 
-            return $this->redirectToRoute('user_verify');
+
+            $cvFile = $form->get('cv')->getData();
+
+            // this condition is needed because the 'cv' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($cvFile) {
+                $originalFilename = pathinfo($cvFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $cvFile->guessExtension();
+
+                // Move the file to the directory where logos are stored
+                try {
+                    $cvFile->move(
+                        $this->getParameter('cv_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'cvFilename' property to store the PDF file name
+                // instead of its contents
+                $candidat->setCv($newFilename);
+
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($candidat);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('user_verify');
+            }
+
+            return $this->render('candidat/new.html.twig', [
+                'candidat' => $candidat,
+                'form' => $form->createView(),
+            ]);
         }
-
-        return $this->render('candidat/new.html.twig', [
-            'candidat' => $candidat,
-            'form' => $form->createView(),
-        ]);
     }
 
     #[Route('/{id}', name: 'candidat_show', methods: ['GET'])]
-    public function show(Candidat $candidat): Response
-    {
+    public function show(Candidat $candidat): Response {
         return $this->render('candidat/show.html.twig', [
             'candidat' => $candidat,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'candidat_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Candidat $candidat): Response
-    {
+    public function edit(Request $request, Candidat $candidat): Response {
         $form = $this->createForm(CandidatType::class, $candidat);
         $form->handleRequest($request);
 
@@ -72,9 +98,8 @@ class CandidatController extends AbstractController
     }
 
     #[Route('/{id}', name: 'candidat_delete', methods: ['DELETE'])]
-    public function delete(Request $request, Candidat $candidat): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$candidat->getId(), $request->request->get('_token'))) {
+    public function delete(Request $request, Candidat $candidat): Response {
+        if ($this->isCsrfTokenValid('delete' . $candidat->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($candidat);
             $entityManager->flush();
