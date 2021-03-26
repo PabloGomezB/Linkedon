@@ -42,6 +42,7 @@ class ApiController extends AbstractController {
         $carta = $data['carta'];
 
 
+
         if (empty($oferta_id) || empty($candidat_id)) {
             throw new NotFoundHttpException('Expecting mandatory parameters!');
         }
@@ -64,7 +65,8 @@ class ApiController extends AbstractController {
         $empresa_email = $empresa->getCorreu();
 
         // Obtener el cv del candidato con id->candidat_id
-        // .....
+        $nomCv = $candidat->getCv();
+
 
         // Redirect a sendEmail() pasandole como parametros los datos necesarios
         return $this->redirectToRoute('sendEmail', array('candidat_id' => $candidat_id, 'empresa_email' => $empresa_email, 'carta' => $carta));
@@ -75,13 +77,14 @@ class ApiController extends AbstractController {
     #[Route('/email/{candidat_id}-{empresa_email}', name: 'sendEmail',)]
     public function sendEmail(MailerInterface $mailer, $candidat_id = 0, $empresa_email = "", $carta = ""): JsonResponse {
 
-        // $email = (new Email())
-        //     ->from('linkedon.inspedralbes@gmail.com')
-        //     ->to('a18pabgombra@inspedralbes.cat') // Substituir por $empresa_email
-        //     ->subject('Nuevo candidato se ha unido a su oferta')
-        //     ->text('wtf es esto?')
-        //     ->html('<p>Usuario inscrito en tu oferta</p><p>$carta</p>'); // Datos del usuario (CV)
-        // $mailer->send($email);
+        $email = (new Email())
+            ->from('linkedon.inspedralbes@gmail.com')
+            ->to('a18pabgombra@inspedralbes.cat') // Substituir por $empresa_email
+            ->subject('Nuevo candidato se ha unido a su oferta')
+            ->text('wtf es esto?')
+            ->html('<p>Usuario inscrito en tu oferta</p><p>$carta</p>') // Datos del usuario (CV)
+            ->attachFromPath('/assets/');
+        $mailer->send($email);
 
         return new JsonResponse(['status' => 'Email Enviado!', 'candidat_id' => $candidat_id, 'empresa_email' => $empresa_email, 'carta' => $carta], Response::HTTP_OK);
     }
