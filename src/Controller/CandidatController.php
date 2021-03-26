@@ -33,7 +33,6 @@ class CandidatController extends AbstractController {
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
             $cvFile = $form->get('cv')->getData();
 
             // this condition is needed because the 'cv' field is not required
@@ -57,20 +56,18 @@ class CandidatController extends AbstractController {
                 // updates the 'cvFilename' property to store the PDF file name
                 // instead of its contents
                 $candidat->setCv($newFilename);
-
-
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($candidat);
-                $entityManager->flush();
-
-                return $this->redirectToRoute('user_verify');
             }
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($candidat);
+            $entityManager->flush();
 
-            return $this->render('candidat/new.html.twig', [
-                'candidat' => $candidat,
-                'form' => $form->createView(),
-            ]);
+            return $this->redirectToRoute('user_verify');
         }
+
+        return $this->render('candidat/new.html.twig', [
+            'candidat' => $candidat,
+            'form' => $form->createView(),
+        ]);
     }
 
     #[Route('/{id}', name: 'candidat_show', methods: ['GET'])]
