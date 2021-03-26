@@ -1,15 +1,10 @@
-# CANDIDAT
-- Poder subir CV cuando el usuario se registra como candidat - Angel
-
-# CHART
-- Chart - Angel
-
 # ADMIN
-- Terminar la parte de enviar correo (falta enviar el CV una vez esté subido y la carta de presentacion) - Jordi
+
+-   Terminar la parte de enviar correo (falta enviar el CV una vez esté subido y la carta de presentacion) - Jordi
 
 # DISEÑO
-- Maquetar segun diseño de angel - Todos¿?
 
+-   Maquetar segun diseño de angel - Todos¿?
 
 # Linkedón
 

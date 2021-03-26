@@ -39,6 +39,7 @@ export default {
         Ofertas,
         ModalOferta,
     },
+
     data() {
         return {
             resultadoOfertas: {},

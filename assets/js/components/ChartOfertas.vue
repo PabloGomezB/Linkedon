@@ -1,10 +1,6 @@
 <template>
     <div class="container">
-        <Chart
-            v-if="loaded"
-            :chartdata="chartdata"
-            :options="options"
-        />
+        <Chart v-if="loaded" :chartdata="chartdata" :options="options" />
     </div>
 </template>
 
@@ -18,43 +14,38 @@ export default {
         loaded: false,
         chartdata: null,
         options: {
-                legend: {
-                    display: true,
-                },
-                responsive: true,
-                maintainAspectRatio: false,
+            legend: {
+                display: true,
+            },
+            responsive: true,
+            maintainAspectRatio: false,
         },
     }),
     mounted() {
-        this.loaded = false;
         let arrayCategorias = new Array();
         this.axios
             .get(
                 "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?join=categoria_id,categoria"
             )
             .then((response) => {
-                response.data.records.forEach(function(item){
+                response.data.records.forEach(function(item) {
                     arrayCategorias.push(item.categoria_id.descripcio);
-                })
-
+                });
                 let uniqueCount = arrayCategorias;
                 var categoriasContadas = {};
-                uniqueCount.forEach(function(i) { categoriasContadas[i] = (categoriasContadas[i]||0) + 1;});
-
+                uniqueCount.forEach(function(i) {
+                    categoriasContadas[i] = (categoriasContadas[i] || 0) + 1;
+                });
                 let arrayLabels = new Array();
                 let arrayData = new Array();
-
-                for(let key in categoriasContadas) {
+                for (let key in categoriasContadas) {
                     arrayLabels.push(key);
-                    arrayData.push(categoriasContadas[key])
+                    arrayData.push(categoriasContadas[key]);
                 }
-
                 console.log(categoriasContadas);
-                console.log("labels: "+arrayLabels)
-                console.log("contador: "+arrayData)
-
-
-                this.chartdata = { 
+                console.log("labels: " + arrayLabels);
+                console.log("contador: " + arrayData);
+                this.chartdata = {
                     labels: arrayLabels,
                     datasets: [
                         {
@@ -77,7 +68,6 @@ export default {
                     ],
                 };
                 this.loaded = true;
-                
             });
     },
 };
