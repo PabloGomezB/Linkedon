@@ -1,5 +1,4 @@
 # CANDIDAT
-- Crear (registrar) candidat cuando se registra un nuevo usuario - Angel
 - Poder subir CV cuando el usuario se registra como candidat - Angel
 
 # CHART
