@@ -6,8 +6,7 @@
             :title="oferta.titol"
             :sub-title="oferta.empresa_id.nom"
             :img-src="
-                require('../../img/uploads/logos_empresa/' +
-                    oferta.empresa_id.logo)
+                require('../../uploads/logos_empresa/' + oferta.empresa_id.logo)
             "
             v-b-modal.modal-oferta
             @click="pasarInfoOferta"

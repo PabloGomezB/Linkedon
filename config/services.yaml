@@ -4,8 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    logos_directory: "%kernel.project_dir%/assets/img/uploads/logos_empresa"
-    cv_directory: "%kernel.project_dir%/assets/cv/uploads/cv_candidats"
+    logos_directory: "%kernel.project_dir%/assets/uploads/logos_empresa"
+    cv_directory: "%kernel.project_dir%/assets/uploads/cv_candidats"
 services:
     # default configuration for services in *this* file
     _defaults:
