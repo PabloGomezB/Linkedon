@@ -22,6 +22,8 @@ export default {
     },
     methods: {
         getOfertasPorCategoria() {
+            this.$parent.mostrarOfertas = false;
+
             if (this.selected == null) {
                 //Si es null obtenemos todas las ofertas
                 this.$emit("getOfertasEvent");
@@ -43,6 +45,7 @@ export default {
                         // Y lo guardamos en resultadoOfertas de el componente padre
                         // para que actualice la lista de oferta filtrada por categoria
                         this.$parent.resultadoOfertas = response.data.records;
+                        this.$parent.mostrarOfertas = true;
                     });
             }
         },

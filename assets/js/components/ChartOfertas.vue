@@ -1,6 +1,9 @@
 <template>
     <div class="container">
         <Chart v-if="loaded" :chartdata="chartdata" :options="options" />
+        <div v-else class="text-center mt-5">
+            <b-spinner label="Loading..."></b-spinner>
+        </div>
     </div>
 </template>
 

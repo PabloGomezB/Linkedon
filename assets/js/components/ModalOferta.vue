@@ -7,7 +7,7 @@
             ref="modal-oferta"
             @hide="resetModal()"
         >
-            <b-container fluid>
+            <b-container fluid v-show="mostrarOferta">
                 <p>{{ ofertaSeleccionada.empresa_id.nom }}</p>
                 <p>{{ ofertaSeleccionada.empresa_id.tipus }}</p>
                 <p>{{ ofertaSeleccionada.data_publicacio }}</p>
@@ -31,6 +31,9 @@
                     ></b-form-textarea>
                 </div>
             </b-container>
+            <div v-show="!mostrarOferta" class="text-center mt-5">
+                <b-spinner label="Loading..."></b-spinner>
+            </div>
             <div class="mt-3">
                 <b-button
                     class="float-right"
@@ -54,6 +57,7 @@ export default {
         return {
             status: "not_accepted",
             textCarta: "",
+            mostrarOferta: true,
         };
     },
     methods: {
@@ -74,6 +78,8 @@ export default {
                 })
                 .then((value) => {
                     if (true == value) {
+                        this.mostrarOferta = false;
+
                         this.axios
                             .get(
                                 "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/candidat?filter=usuari_id,eq," +
@@ -114,6 +120,7 @@ export default {
         resetModal() {
             this.status = "not_accepted";
             this.textCarta = "";
+            this.mostrarOferta = true;
         },
     },
 };

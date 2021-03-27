@@ -68,7 +68,7 @@ class ApiController extends AbstractController {
         // Obtener el cv del candidato con id->candidat_id
         $nomCv = $candidat->getCv();
 
-        $candidatNom = $candidat->getNom().'_'.$candidat->getCognom1().'_'.$candidat->getCognom2();
+        $candidatNom = $candidat->getNom() . '_' . $candidat->getCognom1() . '_' . $candidat->getCognom2();
         // Redirect a sendEmail() pasandole como parametros los datos necesarios
         return $this->redirectToRoute('sendEmail', array('candidatNom' => $candidatNom, 'nomCv' => $nomCv, 'empresa_email' => $empresa_email, 'carta' => $carta));
 
@@ -77,16 +77,16 @@ class ApiController extends AbstractController {
 
     #[Route('/email/{candidatNom}-{nomCv}-{empresa_email}-{carta}', name: 'sendEmail',)]
     public function sendEmail(MailerInterface $mailer, $candidatNom = "", $nomCv = "", $empresa_email = "", $carta = ""): JsonResponse {
-        
+
         $email = (new Email())
             ->from(Address::create('Linkedon Don <linkedon.inspedralbes@gmail.com>'))
-            ->to('a18pabgombra@inspedralbes.cat') // Substituir por $empresa_email
+            ->to('a18jorcalari@inspedralbes.cat') // Substituir por $empresa_email
             ->subject('Nuevo candidato se ha unido a su oferta')
             ->text('wtf es esto?')
             ->html('<p>Usuario inscrito en tu oferta</p><br>
                     <h1>Carta</h1>
                     <p>' . $carta . '</p>')
-            ->attachFromPath($this->getParameter('cv_directory').'/'.$nomCv, $candidatNom.'_CV.pdf');
+            ->attachFromPath($this->getParameter('cv_directory') . '/' . $nomCv, $candidatNom . '_CV.pdf');
         $mailer->send($email);
 
         return new JsonResponse(['status' => 'Email Enviado!', 'nomCv' => $nomCv, 'empresa_email' => $empresa_email, 'carta' => $carta], Response::HTTP_OK);

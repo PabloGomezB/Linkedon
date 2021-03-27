@@ -13,6 +13,7 @@
             :userLogged="userLogged"
             :resultadoOfertas="resultadoOfertas"
             :key="componentKey"
+            :mostrarOfertas="mostrarOfertas"
         >
         </Ofertas>
         <ModalOferta
@@ -61,10 +62,13 @@ export default {
             userLogged: {},
             hasUser: false,
             componentKey: 0,
+            mostrarOfertas: false,
         };
     },
     methods: {
         getOfertas() {
+            this.mostrarOfertas = false;
+
             this.axios
                 .get(
                     "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?filter=estat,eq,1&join=empresa_id,empresa&join=categoria_id,categoria&order=data_publicacio,asc&filter=data_publicacio,gt," +
@@ -74,6 +78,7 @@ export default {
                     console.log("ofertas por categorias", response);
                     // Guardar array de ofertas
                     this.resultadoOfertas = response.data.records;
+                    this.mostrarOfertas = true;
                 });
         },
         getDate3MonthsSubstracted() {
