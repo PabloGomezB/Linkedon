@@ -22,20 +22,22 @@
             </b-card-text>
             <div class="clearfix">
                 <div class="float-left">
-                    <small class="">{{ oferta.ubicacio }}</small>
+                    <small class=""
+                        ><b-icon-geo-alt></b-icon-geo-alt>
+                        {{ oferta.ubicacio }}</small
+                    >
                 </div>
                 <div class="float-right">
-                    <small class="">{{ oferta.data_publicacio }}</small>
+                    <small class="">{{ haceCuantoTiempo() }}</small>
                 </div>
             </div>
-            <!-- <template #footer> -->
-
-            <!-- </template> -->
         </b-card>
     </b-col>
 </template>
 
 <script>
+import * as moment from "moment/moment";
+
 export default {
     name: "Oferta",
     props: { oferta: Object, userLogged: Object },
@@ -52,15 +54,13 @@ export default {
             this.$parent.$parent.ofertaSeleccionada = this.oferta;
         },
         getDate15daysSubstracted() {
-            let date = new Date();
-            date.setDate(date.getDate() - 15);
-            return date;
+            return moment().subtract(15, "days");
         },
         setColorIfHasLessThan15Days() {
             // Para poner la oferta el borde de color rojo para indicar que relatiavamente nuevo (tiene menos de 15 dias).
             if (
                 new Date(this.oferta.data_publicacio) >
-                this.getDate15daysSubstracted()
+                new Date(this.getDate15daysSubstracted())
             ) {
                 this.color15 = "danger";
             }
@@ -84,6 +84,10 @@ export default {
                     });
                 });
         },
+        haceCuantoTiempo() {
+            moment.locale("es");
+            return moment(this.oferta.data_publicacio).fromNow();
+        },
     },
     mounted() {
         this.setColorIfHasLessThan15Days();
@@ -94,7 +98,6 @@ export default {
 
 <style scoped>
 /* scoped para que solo afecte el estilo en este componente */
-/* Para que no haya un borde cuando clicas una oferta */
 p {
     overflow: hidden;
     text-overflow: ellipsis;

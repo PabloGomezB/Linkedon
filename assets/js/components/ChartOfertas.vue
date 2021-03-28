@@ -28,7 +28,7 @@ export default {
         let arrayCategorias = new Array();
         this.axios
             .get(
-                "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?join=categoria_id,categoria"
+                "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?join=categoria_id,categoria&filter=estat,eq,1"
             )
             .then((response) => {
                 response.data.records.forEach(function(item) {

@@ -32,6 +32,7 @@
 import SelectCategoria from "./SelectCategoria";
 import ModalOferta from "./ModalOferta";
 import Ofertas from "./Ofertas";
+import * as moment from "moment/moment";
 
 export default {
     name: "OfertasByCategorias",
@@ -83,12 +84,10 @@ export default {
         },
         getDate3MonthsSubstracted() {
             //Metodo para obtener la fecha de hace 3 meses.
-            let date = new Date();
-            date.setMonth(date.getMonth() - 3);
-            let month = date.getMonth() + 1;
-            let day = date.getDate();
-            let year = date.getFullYear();
-            return year + "/" + month + "/" + day;
+
+            return moment()
+                .subtract(3, "months")
+                .format("YYYY/MM/DD");
         },
         getUserLogged() {
             //Obtener el usuario logged

@@ -8,12 +8,24 @@
             @hide="resetModal()"
         >
             <b-container fluid v-show="mostrarOferta">
+                <p>{{ ofertaSeleccionada.categoria_id.descripcio }}</p>
+                <p>{{ ofertaSeleccionada.data_publicacio }}</p>
+                <img
+                    :src="
+                        require('../../uploads/logos_empresa/' +
+                            ofertaSeleccionada.empresa_id.logo)
+                    "
+                    class="img-fluid"
+                />
+                <p>
+                    {{ ofertaSeleccionada.descripcio }}
+                </p>
+                <p>
+                    <b-icon-geo-alt></b-icon-geo-alt>
+                    {{ ofertaSeleccionada.ubicacio }}
+                </p>
                 <p>{{ ofertaSeleccionada.empresa_id.nom }}</p>
                 <p>{{ ofertaSeleccionada.empresa_id.tipus }}</p>
-                <p>{{ ofertaSeleccionada.data_publicacio }}</p>
-                <p>{{ ofertaSeleccionada.ubicacio }}</p>
-                <p>{{ ofertaSeleccionada.descripcio }}</p>
-                <p>{{ ofertaSeleccionada.categoria_id.descripcio }}</p>
 
                 <b-form-checkbox
                     v-model="status"

@@ -1,6 +1,5 @@
-/* body {
-    background-color: lightgray;
-} */
+/* Para que no haya un borde cuando clicas una oferta */
+
 *:focus {
     outline: 0 !important;
 }

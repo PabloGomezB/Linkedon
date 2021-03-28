@@ -29,6 +29,7 @@ Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 // Usar axios en vue
 Vue.use(VueAxios, axios);
+Vue.use(require("moment"));
 
 new Vue({
     el: "#app", //Id de donde vas a utilizar los componentes de vue
