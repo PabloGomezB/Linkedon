@@ -1,5 +1,5 @@
 <template>
-    <b-col cols="12" sm="6" md="4">
+    <b-col cols="12" md="6" lg="4" class="d-flex align-items-stretch">
         <!-- Al hacer click (@click)en el card pasamos la info de esa oferta hacia el modal que esta en el padre del padre de este componente -->
         <!-- Para abrir el modal hemos de poner v-b-modal.{id del modal que quieres que se muestre} como atributo) -->
         <b-card
@@ -13,7 +13,7 @@
             :border-variant="color15"
             :bg-variant="colorJoinBody"
             :text-variant="colorJoinText"
-            class="mb-3"
+            class="mb-3 card-oferta"
         >
             <b-card-text>
                 <p>
@@ -101,5 +101,14 @@ export default {
 p {
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.card-oferta {
+    transition: transform 0.3s; /* Animation */
+}
+.card-oferta:hover {
+    transform: scale(
+        1.05
+    ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 </style>

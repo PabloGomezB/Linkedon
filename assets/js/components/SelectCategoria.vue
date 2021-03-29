@@ -22,12 +22,12 @@ export default {
     },
     methods: {
         getOfertasPorCategoria() {
-            this.$parent.mostrarOfertas = false;
-
             if (this.selected == null) {
                 //Si es null obtenemos todas las ofertas
-                this.$emit("getOfertasEvent");
+                this.$parent.$emit("getOfertasEvent");
             } else {
+                this.$parent.$parent.isOfertasObtenidas = false;
+
                 // Si no, los filtramos por categoria en el que el valor elegido esta en selected
                 this.axios
                     .get(
@@ -44,8 +44,8 @@ export default {
                         );
                         // Y lo guardamos en resultadoOfertas de el componente padre
                         // para que actualice la lista de oferta filtrada por categoria
-                        this.$parent.resultadoOfertas = response.data.records;
-                        this.$parent.mostrarOfertas = true;
+                        this.$parent.$parent.ofertas = response.data.records;
+                        this.$parent.$parent.isOfertasObtenidas = true;
                     });
             }
         },

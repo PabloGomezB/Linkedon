@@ -1,6 +1,7 @@
 <template>
     <div>
         <b-modal
+            size="lg"
             id="modal-oferta"
             :title="ofertaSeleccionada.titol"
             hide-footer
@@ -42,17 +43,17 @@
                         max-rows="6"
                     ></b-form-textarea>
                 </div>
+                <div class="mt-3">
+                    <b-button
+                        class="float-right"
+                        @click="enviarCV()"
+                        variant="primary"
+                        >Enviar CV</b-button
+                    >
+                </div>
             </b-container>
-            <div v-show="!mostrarOferta" class="text-center mt-5">
+            <div v-show="!mostrarOferta" class="text-center my-5">
                 <b-spinner label="Loading..."></b-spinner>
-            </div>
-            <div class="mt-3">
-                <b-button
-                    class="float-right"
-                    @click="enviarCV()"
-                    variant="primary"
-                    >Enviar CV</b-button
-                >
             </div>
         </b-modal>
     </div>
@@ -105,7 +106,6 @@ export default {
                                 this.axios({
                                     method: "post",
                                     url: "/api/setOfertaCandidat",
-                                    // "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta_candidat",
                                     headers: {},
                                     data: {
                                         oferta_id: this.ofertaSeleccionada.id,

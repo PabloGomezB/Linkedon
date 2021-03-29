@@ -1,10 +1,10 @@
 <template>
     <div>
         <h1>Lista Ofertas</h1>
-        <b-list-group>
+        <b-list-group v-if="isOfertasObtenidas && ofertas.length != 0">
             <b-list-group-item
                 class="flex-column align-items-start"
-                v-for="oferta in resultadoOfertas"
+                v-for="oferta in ofertas"
                 :key="oferta.id"
             >
                 <div class="d-flex w-100 justify-content-between">
@@ -17,31 +17,21 @@
                 <small>{{ oferta.ubicacio }}</small>
             </b-list-group-item>
         </b-list-group>
+        <div v-else-if="!isOfertasObtenidas" class="text-center mt-5">
+            <b-spinner label="Loading..."></b-spinner>
+        </div>
+        <div v-else-if="ofertas.length == 0">
+            <p>No se han encontrado datos.</p>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
     name: "ListaOfertas",
-    data() {
-        return {
-            resultadoOfertas: "",
-        };
-    },
-    methods: {
-        getOfertas() {
-            this.axios
-                .get(
-                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta"
-                )
-                .then((response) => {
-                    console.log("lista ofertas", response);
-                    this.resultadoOfertas = response.data.records;
-                });
-        },
-    },
-    created() {
-        this.getOfertas();
+    props: {
+        isOfertasObtenidas: Boolean,
+        ofertas: Array,
     },
 };
 </script>

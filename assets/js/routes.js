@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import UserLoggedView from "./components/UserLoggedView";
-import ListaOfertas from "./components/ListaOfertas";
+import UserNoLoggedView from "./components/UserNoLoggedView";
 
 Vue.use(VueRouter);
 
@@ -17,7 +17,7 @@ const router = new VueRouter({
         {
             path: "/",
             name: "ListaOfertas",
-            component: ListaOfertas,
+            component: UserNoLoggedView,
         },
     ],
 });
