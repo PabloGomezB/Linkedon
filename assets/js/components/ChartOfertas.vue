@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Gráfico</h1>
+        <h1>Gráfico ofertas por categorias</h1>
 
         <Chart
             v-if="isOfertasObtenidas && ofertas.length != 0"
