@@ -53,9 +53,6 @@ export default {
                 arrayLabels.push(key);
                 arrayData.push(categoriasContadas[key]);
             }
-            console.log(categoriasContadas);
-            console.log("labels: " + arrayLabels);
-            console.log("contador: " + arrayData);
             this.chartdata = {
                 labels: arrayLabels,
                 datasets: [

@@ -1,57 +1,71 @@
-{% extends 'base.html.twig' %}
-{% block title %}Register
+{# {% extends 'base.html.twig' %} #}
+{# 
+{% block title %}Log in!
+{% endblock %} #}
+{% block stylesheets %}
+{{ encore_entry_link_tags('login_registro') }}
 {% endblock %}
-
 {% block body %}
-<div class="container">
-	<h1>Registro</h1>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 	{{ form_start(form) }}
-	{{ form_row(form.email , {
-            "label": "Email",
-        }) }}
-	{{ form_row(form.plainPassword, {
-            label: 'Password'
-        }) }}
+	<div class="container page-wrapper bg-blue p-t-180 p-b-100 font-robo">
+		<div class="wrapper wrapper--w960">
+            <div class="card card-2">
+                <div class="card-heading-registro"></div>
+                <div class="card-body">
+                    <h2 class="title">Registro</h2>
+                    <form method="POST">
+                        <div class="input-group">
+							{{ form_row(form.email)}}
+                        </div>
+						<div class="input-group" id="show_hide_password" style="width:93%;position:relative;">	
+							{{ form_row(form.plainPassword) }}
+							<div class="input-group-addon" style="position: absolute;left: 100%;top: 12;">
+								<a href="" style="background-color:#f2f2f2;border-radius:5px;padding:9px"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+							</div>
+                        </div>
+						{# <label class="checkbox-container">¿Eres empresa?
+							<input type="checkbox" name="checkbox">
+							<span class="checkmark"></span>
+						</label> #}
+						<label class="checkbox-container">¿Eres empresa?
+							{# {{ form_row(form.checkbox) }} #}
+							<input type="checkbox" name="checkbox">
+							<span class="checkmark"></span>
+						</label>
+                        <div class="p-t-30" style="position:relative">
+							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+							<button class="btn btn--radius btn--green" type="submit">
+								Registro
+							</button>
+							<a style="font-size:25px;position:absolute;bottom: 0;left: 94%;" href="/"><i class="fas fa-home"></i></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+		{{ form_end(form) }}
 
-
-	{# CheckBox hardcoded #}
-	{# {% block checkbox_widget %}
-	            <input type="checkbox" id="chbxId" class="form-control"/>
-	        {% endblock checkbox_widget %}
-	        <div id="divFormEmpresa" style="display:none">
-	            {{ include('empresa/_form.html.twig') }}
-	        </div> #}
-
-	{# CheckBox de RegistrationType #}
-	{{ form_row(form.checkbox) }}
-	{# {{ dump(form.checkbox.vars.data) }}
-	        {% if form.checkbox.vars.data == 1 %}
-	            {{ include('oferta/_form.html.twig') }}
-	            <h1>EMPRESA</h1>
-	        {% endif %} #}<button type="submit" class="btn btn-primary"> Register</button>
-	{{ form_end(form) }}
-
-	{% for flashError in app.flashes('verify_email_error') %}
-		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
-	{% endfor %}
-
-	{# {% block javascripts %}
+		{% for flashError in app.flashes('verify_email_error') %}
+			<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+		{% endfor %}
+			{% block javascripts %}
 			<script>
-                window.onload = function (){
-                    let checkbox = document.getElementById("chbxId");
-                    checkbox.addEventListener('click', function(){
-
-                        if (checkbox.checked){
-                            document.getElementById("divFormEmpresa").style.display = "block";
-                        }
-                        else{
-                            document.getElementById("divFormEmpresa").style.display = "none";
-                        }
-                    })
-                }
+                $(document).ready(function() {
+				$("#show_hide_password a").on('click', function(event) {
+					event.preventDefault();
+					if($('#show_hide_password input').attr("type") == "text"){
+						$('#show_hide_password input').attr('type', 'password');
+						$('#show_hide_password i').addClass( "fa-eye-slash" );
+						$('#show_hide_password i').removeClass( "fa-eye" );
+					}else if($('#show_hide_password input').attr("type") == "password"){
+						$('#show_hide_password input').attr('type', 'text');
+						$('#show_hide_password i').removeClass( "fa-eye-slash" );
+						$('#show_hide_password i').addClass( "fa-eye" );
+					}
+				});
+			});
             </script>
-    {% endblock %} #}
-	</div>
-
+    {% endblock %}
 {% endblock %}

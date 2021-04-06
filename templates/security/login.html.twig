@@ -6,6 +6,8 @@
 {{ encore_entry_link_tags('login_registro') }}
 {% endblock %}
 {% block body %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 	<form method="post" class="container page-wrapper bg-blue p-t-180 p-b-100 font-robo">
 		{% if error %}
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -25,42 +27,36 @@
                 <div class="card-heading"></div>
                 <div class="card-body">
                     <h2 class="title">Login</h2>
+					<div class="linkedon-logo-bg"></div>
                     <form method="POST">
                         <div class="input-group">
 							<input class="form-control input--style-2" type="email" value="{{ last_username }}" name="email" id="inputEmail" placeholder="Email" required autofocus>
                         </div>
-						<div class="input-group">	
+						<div class="input-group" id="show_hide_password" style="width:93%;position:relative;">	
 							<input class="form-control input--style-2" type="password" name="password" id="inputPassword" placeholder="Contraseña" required>
-                        </div>
+							<div class="input-group-addon" style="position: absolute;left: 100%;top: 12;">
+								<a href="" style="background-color:#f2f2f2;border-radius:5px;padding:9px"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+							</div>
+						</div>
 						<label class="checkbox-container">Mantener sesión iniciada
 							<input type="checkbox" name="_remember_me">
 							<span class="checkmark"></span>
 						</label>
-                        <div class="p-t-30">
+                        <div class="p-t-30" style="position:relative">
 							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 							<button class="btn btn--radius btn--green" type="submit">
 								Sign in
 							</button>
+							<a style="font-size:25px;position:absolute;bottom: 0;left: 94%;" href="/"><i class="fas fa-home"></i></a>
                         </div>
-						<a style="background-color:grey;float:right;padding:10px;border-radius:10px;text-decoration:none;color:white" href="/">Home</a>
+						
+						{# <a href="" style="background-color:#f2f2f2;border-radius:5px;padding:9px"><i class="fa fa-eye-slash" aria-hidden="true"></i></a> #}
+						
                     </form>
                 </div>
             </div>
         </div>
 	</form>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 		{# <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 		<label for="inputEmail">Email</label>
@@ -86,4 +82,23 @@
 			Sign in
 		</button> #}
 	{# </form> #}
+	{% block javascripts %}
+			<script>
+                $(document).ready(function() {
+				$("#show_hide_password a").on('click', function(event) {
+					event.preventDefault();
+					if($('#show_hide_password input').attr("type") == "text"){
+						$('#show_hide_password input').attr('type', 'password');
+						$('#show_hide_password i').addClass( "fa-eye-slash" );
+						$('#show_hide_password i').removeClass( "fa-eye" );
+					}else if($('#show_hide_password input').attr("type") == "password"){
+						$('#show_hide_password input').attr('type', 'text');
+						$('#show_hide_password i').removeClass( "fa-eye-slash" );
+						$('#show_hide_password i').addClass( "fa-eye" );
+					}
+				});
+			});
+            </script>
+    {% endblock %}
 {% endblock %}
+

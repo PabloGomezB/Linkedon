@@ -343,6 +343,12 @@ input {
   display: table-cell;
 }
 
+.card-2 .card-heading-registro {
+  background: url("../img/login_registro/register.jpeg") top left/cover no-repeat;
+  width: 29.1%;
+  display: table-cell;
+}
+
 .card-2 .card-body {
   display: table-cell;
   padding: 80px 90px;
@@ -434,4 +440,11 @@ input {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+.linkedon-logo-bg{
+  background: url("../img/logosinfondo.png");
+  background-repeat: no-repeat;
+  background-size: 127px 30px;
+  height: 32px;
 }
