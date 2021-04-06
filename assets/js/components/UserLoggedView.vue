@@ -12,7 +12,7 @@
                 <b-spinner label="Loading..."></b-spinner>
             </div>
         </div>
-        <div>
+        <div v-if="showChart">
             <ChartOfertas
                 :isOfertasObtenidas="isOfertasObtenidas"
                 :ofertas="ofertas"
@@ -26,6 +26,7 @@
 import OfertasByCategorias from "./OfertasByCategorias";
 import ChartOfertas from "./ChartOfertas";
 import * as moment from "moment/moment";
+import bus from "../busEvent";
 
 export default {
     name: "UserLoggedView",
@@ -39,6 +40,7 @@ export default {
             isOfertasObtenidas: false,
             userLogged: {},
             hasUser: false,
+            showChart: true,
         };
     },
     methods: {
@@ -72,6 +74,11 @@ export default {
                 this.hasUser = true;
             });
         },
+    },
+    created() {
+        bus.$on("showChartEvent", (show) => {
+            this.showChart = show;
+        });
     },
     mounted() {
         this.getUserLogged();

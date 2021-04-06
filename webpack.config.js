@@ -22,7 +22,19 @@ Encore
      */
     .addEntry("app", "./assets/js/app.js")
     .addEntry("login_registro", "./assets/js/login_registro.js")
+    // .addEntry("logo", "./assets/img/logosinfondo.png")
+    .copyFiles({
+        from: "./assets/img/logo",
 
+        // optional target path, relative to the output dir
+        to: "images/[path][name].[ext]",
+
+        // if versioning is enabled, add the file hash too
+        //to: 'images/[path][name].[hash:8].[ext]',
+
+        // only copy files matching this pattern
+        //pattern: /\.(png|jpg|jpeg)$/
+    })
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge("./assets/controllers.json")
@@ -73,6 +85,6 @@ Encore
     // uncomment if you're having problems with a jQuery plugin
     // .addExternals()
     // .autoProvidejQuery()
-    .enableVueLoader()
+    .enableVueLoader();
 
 module.exports = Encore.getWebpackConfig();

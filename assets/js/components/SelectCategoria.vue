@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import bus from "../busEvent";
+
 export default {
     name: "SelectCategoria",
     data() {
@@ -25,7 +27,10 @@ export default {
             if (this.selected == null) {
                 //Si es null obtenemos todas las ofertas
                 this.$parent.$emit("getOfertasEvent");
+                bus.$emit("showChartEvent", true);
             } else {
+                bus.$emit("showChartEvent", false);
+
                 this.$parent.$parent.isOfertasObtenidas = false;
 
                 // Si no, los filtramos por categoria en el que el valor elegido esta en selected
@@ -77,6 +82,7 @@ export default {
     },
     mounted() {
         this.getCategorias();
+        bus.$emit("showChartEvent", true);
     },
 };
 </script>
