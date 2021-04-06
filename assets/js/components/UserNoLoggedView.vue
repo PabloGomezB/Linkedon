@@ -7,23 +7,34 @@
             ></ListaOfertas>
         </div>
 
-        <div>
-            <ChartOfertas
-                :isOfertasObtenidas="isOfertasObtenidas"
-                :ofertas="resultadoOfertas"
-            ></ChartOfertas>
+        <div class="row">
+            <div class="col">
+                <ChartOfertas
+                    :isOfertasObtenidas="isOfertasObtenidas"
+                    :ofertas="resultadoOfertas"
+                ></ChartOfertas>
+            </div>
+
+            <div class="col">
+                <ChartComarca
+                    :isOfertasObtenidas="isOfertasObtenidas"
+                    :ofertas="resultadoOfertas"
+                ></ChartComarca>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 import ChartOfertas from "./ChartOfertas";
+import ChartComarca from "./ChartComarca";
 import ListaOfertas from "./ListaOfertas";
 
 export default {
     name: "UserNoLoggedView",
     components: {
         ChartOfertas,
+        ChartComarca,
         ListaOfertas,
     },
     data() {
