@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>
+        <div class="mb-5">
             <OfertasByCategorias
                 v-if="hasUser"
                 :ofertas="ofertas"

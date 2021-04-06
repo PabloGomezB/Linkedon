@@ -3,21 +3,39 @@
         <b-modal
             size="lg"
             id="modal-oferta"
-            :title="ofertaSeleccionada.titol"
             hide-footer
             ref="modal-oferta"
             @hide="resetModal()"
         >
-            <b-container fluid v-show="mostrarOferta">
-                <p>{{ ofertaSeleccionada.categoria_id.descripcio }}</p>
-                <p>{{ ofertaSeleccionada.data_publicacio }}</p>
-                <img
-                    :src="
-                        require('../../uploads/logos_empresa/' +
-                            ofertaSeleccionada.empresa_id.logo)
-                    "
-                    class="img-fluid"
-                />
+            <b-container fluid v-show="mostrarOferta" class="mb-5">
+                <div class="row mb-4">
+                    <div class="col">
+                        <h3>{{ ofertaSeleccionada.titol }}</h3>
+                        <p class="text-muted">
+                            {{ ofertaSeleccionada.categoria_id.descripcio }}
+                        </p>
+                        <p class="text-muted">
+                            {{ ofertaSeleccionada.data_publicacio }}
+                        </p>
+                        <div>
+                            <b-button
+                                @click="enviarCV()"
+                                variant="danger"
+                                class="w-100"
+                                >¡Inscríbete!</b-button
+                            >
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img
+                            :src="
+                                require('../../uploads/logos_empresa/' +
+                                    ofertaSeleccionada.empresa_id.logo)
+                            "
+                            class="img-fluid rounded shadow"
+                        />
+                    </div>
+                </div>
                 <p>
                     {{ ofertaSeleccionada.descripcio }}
                 </p>
@@ -42,14 +60,6 @@
                         rows="3"
                         max-rows="6"
                     ></b-form-textarea>
-                </div>
-                <div class="mt-3">
-                    <b-button
-                        class="float-right"
-                        @click="enviarCV()"
-                        variant="primary"
-                        >Enviar CV</b-button
-                    >
                 </div>
             </b-container>
             <div v-show="!mostrarOferta" class="text-center my-5">

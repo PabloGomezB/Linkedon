@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>
+        <div class="mb-5">
             <ListaOfertas
                 :isOfertasObtenidas="isOfertasObtenidas"
                 :ofertas="resultadoOfertas"

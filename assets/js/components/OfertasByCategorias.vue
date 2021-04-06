@@ -23,9 +23,6 @@
             @forceRerenderEvent="forceRerender()"
         ></ModalOferta>
     </div>
-    <!-- <div v-else class="text-center mt-5">
-        <b-spinner label="Loading..."></b-spinner>
-    </div> -->
 </template>
 
 <script>
