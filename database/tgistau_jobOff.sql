@@ -36,7 +36,7 @@ CREATE TABLE `candidat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Volcado de datos para la tabla `candidat`
+-- Volcado de datos para la tabla `candidat`:D
 --
 
 INSERT INTO `candidat` (`id`, `usuari_id`, `nom`, `cognom1`, `cognom2`, `telefon`) VALUES
