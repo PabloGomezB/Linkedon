@@ -32,7 +32,7 @@
                                 require('../../uploads/logos_empresa/' +
                                     ofertaSeleccionada.empresa_id.logo)
                             "
-                            class="img-fluid rounded shadow"
+                            class="rounded shadow image-emp"
                         />
                     </div>
                 </div>
@@ -148,4 +148,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.image-emp {
+    object-fit: cover;
+    width: 100%;
+    height: 145px;
+}
+</style>
