@@ -6,16 +6,16 @@
                 :ofertas="resultadoOfertas"
             ></ListaOfertas>
         </div>
-
+        <hr style="background-color:#ededed;margin-bottom:50px;width:80%">
         <div class="row">
-            <div class="col">
+            <div class="col-md-6">
                 <ChartOfertas
                     :isOfertasObtenidas="isOfertasObtenidas"
                     :ofertas="resultadoOfertas"
                 ></ChartOfertas>
             </div>
 
-            <div class="col">
+            <div class="col-md-6">
                 <ChartComarca
                     :isOfertasObtenidas="isOfertasObtenidas"
                     :ofertas="resultadoOfertas"

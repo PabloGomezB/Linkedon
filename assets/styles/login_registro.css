@@ -443,8 +443,10 @@ input {
 }
 
 .linkedon-logo-bg{
-  background: url("../img/logosinfondo.png");
+  background: url("../img/logo/logosinfondo.png");
   background-repeat: no-repeat;
-  background-size: 127px 30px;
-  height: 32px;
+  background-size: 170px 40px;
+  padding-left: 175px;
+  margin-left: auto;
+  margin-top: -10px;
 }

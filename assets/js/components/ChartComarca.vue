@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Gráfico de ofertas por ciudades</h1>
+        <h1 class="mb-5">Gráfico de ofertas por ciudades</h1>
 
         <ChartBar
             v-if="isOfertasObtenidas && ofertas.length != 0"
