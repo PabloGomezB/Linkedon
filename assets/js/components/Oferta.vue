@@ -8,6 +8,7 @@
             :img-src="
                 require('../../uploads/logos_empresa/' + oferta.empresa_id.logo)
             "
+            :img-height="110"
             v-b-modal.modal-oferta
             @click="pasarInfoOferta"
             :border-variant="color15"
@@ -16,9 +17,7 @@
             class="mb-3 card-oferta"
         >
             <b-card-text>
-                <p>
-                    {{ oferta.descripcio }}
-                </p>
+                {{ oferta.descripcio }}
             </b-card-text>
             <div class="clearfix">
                 <div class="float-left">
@@ -99,8 +98,13 @@ export default {
 <style scoped>
 /* scoped para que solo afecte el estilo en este componente */
 p {
+    height: 43px;
     overflow: hidden;
     text-overflow: ellipsis;
+    /* white-space: nowrap; */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .card-oferta {
@@ -110,5 +114,9 @@ p {
     transform: scale(
         1.05
     ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+img {
+    object-fit: cover;
 }
 </style>
