@@ -12,11 +12,21 @@
                 <b-spinner label="Loading..."></b-spinner>
             </div>
         </div>
-        <div v-if="showChart">
-            <ChartOfertas
-                :isOfertasObtenidas="isOfertasObtenidas"
-                :ofertas="ofertas"
-            ></ChartOfertas>
+        <hr style="background-color:#ededed;margin-bottom:50px;width:80%">
+        <div class="row">
+            <div  v-if="showChart" class="col-md-6">
+                <ChartOfertas
+                    :isOfertasObtenidas="isOfertasObtenidas"
+                    :ofertas="ofertas"
+                ></ChartOfertas>
+            </div>
+
+            <div class="col-md-6">
+                <ChartComarca
+                    :isOfertasObtenidas="isOfertasObtenidas"
+                    :ofertas="ofertas"
+                ></ChartComarca>
+            </div>
         </div>
     </div>
 </template>
@@ -24,6 +34,7 @@
 <script>
 // import ListaOfertas from "./ListaOfertas";
 import OfertasByCategorias from "./OfertasByCategorias";
+import ChartComarca from "./ChartComarca";
 import ChartOfertas from "./ChartOfertas";
 import * as moment from "moment/moment";
 import bus from "../busEvent";
@@ -33,6 +44,7 @@ export default {
     components: {
         OfertasByCategorias,
         ChartOfertas,
+        ChartComarca,
     },
     data() {
         return {

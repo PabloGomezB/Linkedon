@@ -21,6 +21,11 @@
 					</li>
 				{% endif %}
 				{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+						{% if is_granted("ROLE_EMPRESA") %}
+						<li class="nav-item">
+							<a href="/oferta/misofertas" class="nav-link" style="color:white;">Mis ofertas</a>
+						</li>
+						{% endif %}
 					<li class="nav-item">
 						<a href="/logout" class="nav-link" style="color:white;">Logout</a>
 					</li>

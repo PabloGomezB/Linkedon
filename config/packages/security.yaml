@@ -52,6 +52,9 @@ security:
         # Empresa
         - { path: ^/oferta/new, roles: [ROLE_ADMIN, ROLE_EMPRESA] }
         - { path: ^/empresa/new, roles: [ROLE_ADMIN, ROLE_EMPRESA] } # Tambien desde el controler se evita que pueda volver a entrar estando logedado
+        - { path: ^/oferta/misofertas, roles: [ROLE_ADMIN, ROLE_EMPRESA] }
+        - { path: ^/oferta/misofertas/edit, roles: [ROLE_ADMIN, ROLE_EMPRESA] }
+        - { path: ^/oferta/delete, roles: [ROLE_ADMIN, ROLE_EMPRESA] }
         # User
         - { path: ^/candidat/new, role: [ROLE_ADMIN, ROLE_USER] }  # Tambien desde el controler se evita que pueda volver a entrar estando logedado
         - { path: ^/UserLoggedView, role: [ROLE_ADMIN, ROLE_USER] } # No se porque desde aqui no funciona (se controla desde LinkedonController)

@@ -3,40 +3,90 @@
 {% block title %}Oferta{% endblock %}
 
 {% block body %}
-    <h1>Oferta</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
-    <table class="table">
+    <div class="container p-5">
+        <h1>Mis ofertas</h1>
+
+        {% if ofertas is empty %}
+        <h5>No hay ofertas nuevas para revisar</h5>
+        {% else %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Titol</th>
+                    <th>Descripcio</th>
+                    <th>DataPublicacio</th>
+                    <th>Ubicacio</th>
+                    <th>Estat</th>
+                    <th>Editar/Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for miOferta in ofertas %}
+                <tr>
+                    <td>{{ miOferta.titol }}</td>
+                    <td>{{ miOferta.descripcio }}</td>
+                    <td>{{ miOferta.dataPublicacio ? miOferta.dataPublicacio|date('Y-m-d') : '' }}</td>
+                    <td>{{ miOferta.ubicacio }}</td>
+                    {% if miOferta.estat == 1 %}
+                    <td style="color:#00de07;font-weight:bolder;">Publicada</td>
+                    {% elseif miOferta.estat == 2 %}
+                    <td style="color:red;font-weight:bolder;">Rechazada</td>
+                    {% else %}
+                    <td style="color:grey;font-weight:bolder;">Borrador</td>
+                    {% endif %}
+                    <td style="width: 120px;">
+                        <a class="btn btn-warning" style="padding: 8px 13px"
+                            href="{{ path('oferta_edit_misofertas', {'id': miOferta.id}) }}"><i class="fas fa-edit" style="font-size:20px"></i></a>
+                        <a class="btn btn-danger" style="padding: 8px 13px"
+                            href="{{ path('oferta_delete', {'id': miOferta.id}) }}"><i class="fas fa-trash" style="font-size:20px"></i></a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+
+
+
+    {# <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ ofertum.id }}</td>
+                <td>{{ ofertas.id }}</td>
             </tr>
             <tr>
                 <th>Titol</th>
-                <td>{{ ofertum.titol }}</td>
+                <td>{{ ofertas.titol }}</td>
             </tr>
             <tr>
                 <th>Descripcio</th>
-                <td>{{ ofertum.descripcio }}</td>
+                <td>{{ ofertas.descripcio }}</td>
             </tr>
             <tr>
                 <th>DataPublicacio</th>
-                <td>{{ ofertum.dataPublicacio ? ofertum.dataPublicacio|date('Y-m-d') : '' }}</td>
+                <td>{{ ofertas.dataPublicacio ? ofertas.dataPublicacio|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
                 <th>Ubicacio</th>
-                <td>{{ ofertum.ubicacio }}</td>
+                <td>{{ ofertas.ubicacio }}</td>
             </tr>
             <tr>
                 <th>Estat</th>
-                <td>{{ ofertum.estat }}</td>
+                <td>{{ ofertas.estat }}</td>
             </tr>
         </tbody>
-    </table>
+    </table> #}
 
-    <a href="{{ path('oferta_index') }}">back to list</a>
+    {# <a href="{{ path('oferta_index') }}">back to list</a>
 
     <a href="{{ path('oferta_edit', {'id': ofertum.id}) }}">edit</a>
 
-    {{ include('oferta/_delete_form.html.twig') }}
+    {{ include('oferta/_delete_form.html.twig') }} #}
 {% endblock %}

@@ -3,6 +3,7 @@
 {% block title %}Admin{% endblock %}
 
 {% block body %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 <div class="container">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
@@ -33,7 +34,7 @@
                             <th>Descripcio</th>
                             <th>DataPublicacio</th>
                             <th>Ubicacio</th>
-                            <th>Acciones</th>
+                            <th>Admitir/Rechazar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,10 +46,10 @@
                             <td>{{ ofertaE0.dataPublicacio ? ofertaE0.dataPublicacio|date('Y-m-d') : '' }}</td>
                             <td>{{ ofertaE0.ubicacio }}</td>
                             <td>
-                                <a class="btn btn-success"
-                                    href="{{ path('admin_admitir', {'id': ofertaE0.id, 'publicar' : 1}) }}">Publicar</a>
-                                <a class="btn btn-danger"
-                                    href="{{ path('admin_admitir', {'id': ofertaE0.id, 'publicar' : 0}) }}">Rechazar</a>
+                                <a class="btn btn-success" style="padding: 8px 13px"
+                                    href="{{ path('admin_admitir', {'id': ofertaE0.id, 'publicar' : 1}) }}"><i class="fas fa-check" style="font-size:20px"></i></a>
+                                <a class="btn btn-danger" style="padding: 8px 17px"
+                                    href="{{ path('admin_admitir', {'id': ofertaE0.id, 'publicar' : 0}) }}"><i class="fas fa-times" style="font-size:20px"></i></a>
                             </td>
                         </tr>
                         {% else %}
@@ -117,7 +118,7 @@
                             <th>Ubicacio</th>
                             <th>Estat</th>
                             <th>Categoria</th>
-                            <th>Acciones</th>
+                            <th>Editar/Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -130,18 +131,18 @@
                             <td>{{ ofertum.dataPublicacio ? ofertum.dataPublicacio|date('Y-m-d') : '' }}</td>
                             <td>{{ ofertum.ubicacio }}</td>
                             {% if ofertum.estat == 1 %}
-                            <td style="color:green">Publicada</td>
+                            <td style="color:#00de07;font-weight:bolder;">Publicada</td>
                             {% elseif ofertum.estat == 2 %}
-                            <td style="color:red">Rechazada</td>
+                            <td style="color:red;font-weight:bolder;">Rechazada</td>
                             {% else %}
-                            <td style="color:grey">Borrador</td>
+                            <td style="color:grey;font-weight:bolder;">Borrador</td>
                             {% endif %}
                             <td>{{ ofertum.categoria }}</td>
-                            <td>
-                                <a class="btn btn-warning"
-                                    href="{{ path('oferta_edit', {'id': ofertum.id}) }}">Editar</a>
-                                <a class="btn btn-danger"
-                                    href="{{ path('admin_delete', {'id': ofertum.id}) }}">Eliminar</a>
+                            <td style="width: 120px;">
+                                <a class="btn btn-warning" style="padding: 8px 13px"
+                                    href="{{ path('oferta_edit', {'id': ofertum.id}) }}"><i class="fas fa-edit" style="font-size:20px"></i></a>
+                                <a class="btn btn-danger" style="padding: 8px 13px"
+                                    href="{{ path('admin_delete', {'id': ofertum.id}) }}"><i class="fas fa-trash" style="font-size:20px"></i></a>
                             </td>
                         </tr>
                         {% else %}

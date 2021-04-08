@@ -48,7 +48,7 @@ export default {
             this.isOfertasObtenidas = false;
             this.axios
                 .get(
-                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?join=categoria_id,categoria"
+                    "http://labs.iam.cat/~a18jorcalari/Linkedon/api.php/records/oferta?filter=estat,eq,1&join=categoria_id,categoria"
                 )
                 .then((response) => {
                     console.log("lista ofertas", response);

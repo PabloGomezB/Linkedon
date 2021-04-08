@@ -3,3 +3,8 @@
 *:focus {
     outline: 0 !important;
 }
+
+.card-img{
+    max-height: 250px;
+    object-fit: cover;
+}
