@@ -33,7 +33,10 @@ class RegistrationController extends AbstractController
             );
 
             // Si en el registro ha marcado el checkbox de empresa, asigna rol de empresa y unverified para que pase al registro como empresa
-            if ($form->get('checkbox')->getData() == 1){
+            // if ($form->get('checkbox')->getData() == 1){
+                // print_r($request->get("checkbox"));
+            if ($request->get("checkbox") == "on"){
+
                 $user->setRoles(array('ROLE_EMPRESA','ROLE_UNVERIFIED'));
             }
             else{

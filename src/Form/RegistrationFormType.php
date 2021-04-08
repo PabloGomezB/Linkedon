@@ -20,17 +20,19 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', null, [
-                'attr' => array('class' => 'form-control', 'placeholder' => 'kolvin@gmail.com')
+                'attr' => array('class' => 'form-control input--style-2', 'placeholder' => 'Email'),
+                'label' => false
             ])
-            ->add('checkbox', CheckboxType::class, [
-                'label' => '¿Eres empresa?',
-                'required' => false,
-                'mapped' => false,
-                'attr' => array('class' => 'form-control')
-            ])
+            // ->add('checkbox', CheckboxType::class, [
+            //     'label' => false,
+            //     'required' => false,
+            //     'mapped' => false,
+            //     'attr' => array('type' => 'checkbox')
+            // ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
+                'label' => false,
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
@@ -43,7 +45,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-                'attr' => array('class' => 'form-control')
+                'attr' => array('class' => 'form-control input--style-2', 'placeholder' => 'Contraseña')
             ])
         ;
     }

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+{% block title %}Register
+{% endblock %}
+
+{% block body %}
+<div class="container">
+	<h1>Registro</h1>
+
+	{{ form_start(form) }}
+	{{ form_row(form.email , {
+            "label": "Email",
+        }) }}
+	{{ form_row(form.plainPassword, {
+            label: 'Password'
+        }) }}
+
+
+	{# CheckBox hardcoded #}
+	{# {% block checkbox_widget %}
+	            <input type="checkbox" id="chbxId" class="form-control"/>
+	        {% endblock checkbox_widget %}
+	        <div id="divFormEmpresa" style="display:none">
+	            {{ include('empresa/_form.html.twig') }}
+	        </div> #}
+
+	{# CheckBox de RegistrationType #}
+	{{ form_row(form.checkbox) }}
+	{# {{ dump(form.checkbox.vars.data) }}
+	        {% if form.checkbox.vars.data == 1 %}
+	            {{ include('oferta/_form.html.twig') }}
+	            <h1>EMPRESA</h1>
+	        {% endif %} #}<button type="submit" class="btn btn-primary"> Register</button>
+	{{ form_end(form) }}
+
+	{% for flashError in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+	{% endfor %}
+
+	{# {% block javascripts %}
+			<script>
+                window.onload = function (){
+                    let checkbox = document.getElementById("chbxId");
+                    checkbox.addEventListener('click', function(){
+
+                        if (checkbox.checked){
+                            document.getElementById("divFormEmpresa").style.display = "block";
+                        }
+                        else{
+                            document.getElementById("divFormEmpresa").style.display = "none";
+                        }
+                    })
+                }
+            </script>
+    {% endblock %} #}
+	</div>
+
+{% endblock %}
