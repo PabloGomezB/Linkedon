@@ -39,12 +39,16 @@
                 <p>
                     {{ ofertaSeleccionada.descripcio }}
                 </p>
-                <p>
+                <hr />
+                <h6>
                     <b-icon-geo-alt></b-icon-geo-alt>
                     {{ ofertaSeleccionada.ubicacio }}
+                </h6>
+                <hr />
+                <h5>{{ ofertaSeleccionada.empresa_id.nom }}</h5>
+                <p class="font-weight-light">
+                    {{ ofertaSeleccionada.empresa_id.tipus }}
                 </p>
-                <p>{{ ofertaSeleccionada.empresa_id.nom }}</p>
-                <p>{{ ofertaSeleccionada.empresa_id.tipus }}</p>
 
                 <b-form-checkbox
                     v-model="status"

@@ -1,5 +1,11 @@
 <template>
-    <b-col cols="12" md="6" lg="4" class="d-flex align-items-stretch" style="position:relative">
+    <b-col
+        cols="12"
+        md="6"
+        lg="4"
+        class="d-flex align-items-stretch"
+        style="position:relative"
+    >
         <!-- Al hacer click (@click)en el card pasamos la info de esa oferta hacia el modal que esta en el padre del padre de este componente -->
         <!-- Para abrir el modal hemos de poner v-b-modal.{id del modal que quieres que se muestre} como atributo) -->
         <b-card
@@ -8,6 +14,7 @@
             :img-src="
                 require('../../uploads/logos_empresa/' + oferta.empresa_id.logo)
             "
+            :img-height="110"
             v-b-modal.modal-oferta
             @click="pasarInfoOferta"
             :bg-variant="colorJoinBody"
@@ -16,9 +23,7 @@
         >
             <b-card-text>
                 <p v-if="isNew === true" class="new">New &#9733;</p>
-                <p>
-                    {{ oferta.descripcio }}
-                </p>
+                {{ oferta.descripcio }}
             </b-card-text>
             <div class="clearfix">
                 <div class="float-left">
@@ -99,8 +104,13 @@ export default {
 <style scoped>
 /* scoped para que solo afecte el estilo en este componente */
 p {
+    height: 43px;
     overflow: hidden;
     text-overflow: ellipsis;
+    /* white-space: nowrap; */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .card-oferta {
@@ -111,12 +121,15 @@ p {
         1.05
     ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
-.new{
-    top:0;
-    right:0;
-    position:absolute;
+.new {
+    top: 0;
+    right: 0;
+    position: absolute;
     padding: 5px;
     background-color: #2196f3;
     color: white;
+}
+img {
+    object-fit: cover;
 }
 </style>
