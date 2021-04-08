@@ -22,7 +22,7 @@
             class="mb-3 card-oferta"
         >
             <b-card-text>
-                <p v-if="isNew === true" class="new">New &#9733;</p>
+                <span v-if="isNew === true" class="new">New &#9733;</span>
                 {{ oferta.descripcio }}
             </b-card-text>
             <div class="clearfix">
