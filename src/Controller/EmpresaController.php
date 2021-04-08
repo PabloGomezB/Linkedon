@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/empresa')]
@@ -25,6 +24,9 @@ class EmpresaController extends AbstractController {
 
     #[Route('/new', name: 'empresa_new', methods: ['GET', 'POST'])]
     public function new(Request $request, SluggerInterface $slugger): Response {
+
+        $this->denyAccessUnlessGranted('ROLE_UNVERIFIED', null);
+
         $empresa = new Empresa();
         $userLogged = $this->getUser();
         // Hacemos set al objeto empresa con los datos de la empresa logeado actualmente para poder hacer las foreign keys

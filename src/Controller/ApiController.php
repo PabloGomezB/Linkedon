@@ -80,7 +80,7 @@ class ApiController extends AbstractController {
 
         $email = (new Email())
             ->from(Address::create('Linkedon Don <linkedon.inspedralbes@gmail.com>'))
-            ->to('a18jorcalari@inspedralbes.cat') // Substituir por $empresa_email
+            ->to('a18pabgombra@inspedralbes.cat') // Substituir por $empresa_email
             ->subject('Nuevo candidato se ha unido a su oferta')
             ->text('wtf es esto?')
             ->html('<p>Usuario inscrito en tu oferta</p><br>

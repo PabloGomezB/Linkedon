@@ -23,6 +23,18 @@ class OfertaController extends AbstractController
         ]);
     }
 
+    #[Route('/misofertas', name: 'oferta_empresa', methods: ['GET'])]
+    public function ofertasPorEmpresa(OfertaRepository $ofertaRepository): Response
+    {
+        $userLoggedId = $this->getUser()->getId();
+        $empresa = $this->getDoctrine()->getRepository(Empresa::class)->findBy(array('usuari' => $userLoggedId));
+        $empresaId = $empresa[0]->getId();
+
+        return $this->render('oferta/show.html.twig', [
+            'ofertas' => $ofertaRepository->findBy(array('empresa' => $empresaId)),
+        ]);
+    }
+
     #[Route('/new', name: 'oferta_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response{
         $ofertum = new Oferta();
@@ -76,15 +88,32 @@ class OfertaController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'oferta_delete', methods: ['DELETE'])]
-    public function delete(Request $request, Oferta $ofertum): Response
+
+    #[Route('/misofertas/edit/{id}', name: 'oferta_edit_misofertas', methods: ['GET', 'POST'])]
+    public function editMiOferta(Request $request, Oferta $ofertum): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$ofertum->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($ofertum);
-            $entityManager->flush();
+        $form = $this->createForm(OfertaType::class, $ofertum);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('oferta_empresa');
         }
 
-        return $this->redirectToRoute('oferta_index');
+        return $this->render('oferta/edit.html.twig', [
+            'ofertum' => $ofertum,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+    #[Route('/delete/{id}', name: 'oferta_delete')]
+    public function delete(Request $request, Oferta $ofertum): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($ofertum);
+        $entityManager->flush();
+        return $this->redirectToRoute('oferta_empresa');
     }
 }

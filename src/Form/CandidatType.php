@@ -13,15 +13,15 @@ use Symfony\Component\Validator\Constraints\File;
 class CandidatType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-            ->add('nom')
-            ->add('cognom1')
-            ->add('cognom2')
-            ->add('telefon')
+            ->add('nom', null, array('attr' => array('class' => 'form-control', 'placeholder' => 'Kolvin')))
+            ->add('cognom1', null, array('attr' => array('class' => 'form-control', 'placeholder' => 'Larriega')))
+            ->add('cognom2', null, array('attr' => array('class' => 'form-control', 'placeholder' => 'Palomino')))
+            ->add('telefon', null, array('attr' => array('class' => 'form-control', 'placeholder' => '681038573')))
             // ->add('usuari')
             // ->add('ofertes')
             //Crea el imput puedes elegir el tipo de archivo a subir.
             ->add('cv', FileType::class, [
-                'label' => 'Pdf (Pdf file)',
+                'label' => 'Curriculum Vitae (solo archivos .pdf)',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
@@ -39,7 +39,7 @@ class CandidatType extends AbstractType {
                             'application/pdf',
                             'application/x-pdf',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid pdf type',
+                        'mimeTypesMessage' => 'Porfavor sube un archivo .pdf valido',
                     ])
                 ],
             ]);;
