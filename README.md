@@ -66,6 +66,10 @@ symfony server:start -d
 
 Y la consola te dirá la dirección web local.
 
+## Figma
+
+https://www.figma.com/proto/wSe7r50XOxIdgjde5tLVN0/Linkedon-(Wireframe)?node-id=1%3A10&scaling=min-zoom
+
 ## Despliegue 📦
 
 Al final no se ha podido desplegar Symfony.
