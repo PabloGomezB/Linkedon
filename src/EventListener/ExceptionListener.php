@@ -30,7 +30,7 @@ class ExceptionListener
         if ($route === $event->getRequest()->get('_route')) {
             return;
         }
-        $url = $this->router->generate($route);
+        $url = $this->router->generate($route); // Ruta definida en LinkedonController
         $response = new RedirectResponse($url);
         $event->setResponse($response);
     }

@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Empresa;
-use App\Form\EmpresaType;
 use App\Form\RegistrationFormType;
 use App\Security\LoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
